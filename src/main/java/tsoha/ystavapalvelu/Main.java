@@ -25,7 +25,7 @@ public class Main {
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("tomiiko", database.testDatabaseConnection());
+            map.put("toimiiko", database.testDatabaseConnection());
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
