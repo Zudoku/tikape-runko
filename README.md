@@ -1,4 +1,10 @@
-# tikape-runko
+# Tietokantasovelluksen esittelysivu
 
-Tietokantojen perusteet -kurssilla tehtävän web-sovelluksen pohja.
+Yleisiä linkkejä:
 
+* [Linkki sovellukseeni TBD](https://www.cs.helsinki.fi)
+* [Linkki dokumentaatiooni TBD](https://www.github.com)
+
+## Työn aihe
+
+[Ystävänvälityspalvelu](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Ystavanvalityspalvelu.html) 
