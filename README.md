@@ -2,8 +2,8 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni TBD](https://protected-reef-49430.herokuapp.com/)
-* [Linkki dokumentaatiooni TBD](https://github.com/Zudoku/tsoha-ystavapalvelu/blob/master/doc/dokumentaatio.pdf)
+* [Linkki sovellukseeni](https://protected-reef-49430.herokuapp.com/)
+* [Linkki dokumentaatiooni](https://github.com/Zudoku/tsoha-ystavapalvelu/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
