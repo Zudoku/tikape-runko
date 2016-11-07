@@ -77,7 +77,7 @@ public class Database {
         // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
         lista.add("DROP TABLE IF EXISTS Testing;");
         lista.add("CREATE TABLE Testing (id integer PRIMARY KEY, nimi varchar(255));");
-        lista.add("INSERT INTO Testing (nimi) VALUES ('TOIMII');");
+        lista.add("INSERT INTO Testing (id,nimi) VALUES (1,'TOIMII');");
 
         return lista;
     }
