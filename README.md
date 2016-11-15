@@ -18,7 +18,7 @@ Yleisiä linkkejä:
 * [Omat sivut](https://protected-reef-49430.herokuapp.com/mypages)
 * [Minulle jaetut sivut](https://protected-reef-49430.herokuapp.com/sharedpages)
 * [Selaa sivuja](https://protected-reef-49430.herokuapp.com/pagelist)
-* [Viestit](https://protected-reef-49430.herokuapp.com/myprofile)
+* [Viestit](https://protected-reef-49430.herokuapp.com/mymessages)
 * [Katso sivua](https://protected-reef-49430.herokuapp.com/page/1)
 * [Muokkaa sivua](https://protected-reef-49430.herokuapp.com/page/edit/1)
 * [Lähetä viesti](https://protected-reef-49430.herokuapp.com/sendmessage/1)
