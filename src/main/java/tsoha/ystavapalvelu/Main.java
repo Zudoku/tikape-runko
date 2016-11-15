@@ -2,6 +2,7 @@ package tsoha.ystavapalvelu;
 
 import java.util.HashMap;
 import spark.ModelAndView;
+import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tsoha.ystavapalvelu.database.Database;
@@ -9,6 +10,9 @@ import tsoha.ystavapalvelu.database.Database;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        // Asetetaan public kansio kaikkien nähtäville
+        Spark.staticFileLocation("/public");
+        
         String jdbcOsoite = "";
         // jos heroku antaa käyttöömme tietokantaosoitteen, otetaan se käyttöön
         if (System.getenv("DATABASE_URL") != null) {
@@ -18,7 +22,7 @@ public class Main {
         Database database = new Database(jdbcOsoite);
         database.init();
 
-        // asetetaan portti jos heroku antaa PORT-ympäristömuuttujan
+        // jos heroku antaa PORT-ympäristömuuttujan, asetetaan portti 
         if (System.getenv("PORT") != null) {
             port(Integer.valueOf(System.getenv("PORT")));
         }
