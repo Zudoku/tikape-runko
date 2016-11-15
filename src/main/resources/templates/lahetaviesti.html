@@ -13,16 +13,14 @@
     
     <body>
         <div class="container">
-            <div class="jumbotron">
-                <h1>Ystävänvälityspalvelu</h1>
-                <small>PariTELE Oy</small>
-                <p>
-                    Rekisteröidy palveluumme ja löydä unelmien ystäväsi! 
-                    Palvelu tarjoaa yksinäisille suomalaisille tavan löytää uusia tuttavuuksia ja ystäviä! Kokeile sinäkin!
-                </p>
-                <a class="btn btn-default" href="#">Rekisteröidy</a>
-                
-            </div>
+            <h1>Lähetä viesti henkilölle Gajaja2828</h1>
+            <form th:action="@{~/message}" th:object="${messageInfo}" method="post">
+                <div class="form-group">
+                    <label for="sisalto">Viestin sisältö</label>
+                    <textarea id="sisalto" name="sisalto"  class="form-control" rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Lähetä viesti</button>
+            </form>
         </div>
         <!-- Add jQuery for bootstrap -->
         <script src="/static/js/jquery.js"></script>

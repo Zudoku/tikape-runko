@@ -35,16 +35,27 @@
                         <li><a href="#">Viestit</a></li>
                         
                     </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Kirjaudu sisään</a></li>
-                    </ul>
                 </div>
             </div>
         </nav>
 
         <div class="container">
-
+            <form th:action="@{~/editPage}" th:object="${pageInfo}" method="post">
+                <div class="form-group">
+                    <label for="otsikko">Otsikko</label>
+                    <input id="otsikko" name="otsikko" type="text" class="form-control"  placeholder="Esittelysivun otsikko" value="Etsin jalkapallokaveria"/>
+                </div>
+                <div class="form-group">
+                    <label for="leipateksti">Leipäteksti</label>
+                    <textarea id="leipateksti" name="leipateksti"  class="form-control" rows="10">Hei! Etsin kaikenikäistä kaveria pelaamaan kanssani jalkapalloa</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="julkinen">Sivu on julkinen</label>
+                    <input type="checkbox" id="julkinen" value="julkinen" aria-label="" class="disabled" checked/>
+                </div>
+                <button type="submit" class="btn btn-primary">Päivitä</button>
+                <a href="#"class="btn btn-danger">Poista</a>
+            </form>
         </div>
         <!-- Add jQuery for bootstrap -->
         <script src="/static/js/jquery.js"></script>

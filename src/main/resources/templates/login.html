@@ -13,16 +13,17 @@
     
     <body>
         <div class="container">
-            <div class="jumbotron">
-                <h1>Ystävänvälityspalvelu</h1>
-                <small>PariTELE Oy</small>
-                <p>
-                    Rekisteröidy palveluumme ja löydä unelmien ystäväsi! 
-                    Palvelu tarjoaa yksinäisille suomalaisille tavan löytää uusia tuttavuuksia ja ystäviä! Kokeile sinäkin!
-                </p>
-                <a class="btn btn-default" href="#">Rekisteröidy</a>
-                
-            </div>
+            <form th:action="@{~/login}" th:object="${loginInfo}" method="post">
+                <div class="form-group">
+                    <label for="username">Käyttäjäsi nimi</label>
+                    <input id="username" name="username" type="text" class="form-control"  placeholder="Nimimerkkisi" />
+                </div>
+                <div class="form-group">
+                    <label for="passwd">Salasana</label>
+                    <input id="passwd" name="passwd" type="password" class="form-control"  placeholder="Salasanasi" />
+                </div>
+                <button type="submit" class="btn btn-success">Kirjaudu sisään</button>
+            </form>
         </div>
         <!-- Add jQuery for bootstrap -->
         <script src="/static/js/jquery.js"></script>

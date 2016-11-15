@@ -26,13 +26,59 @@ public class Main {
         if (System.getenv("PORT") != null) {
             port(Integer.valueOf(System.getenv("PORT")));
         }
+        
+        
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("toimiiko", database.testDatabaseConnection());
-
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
-
+        
+        get("/register", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "register");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/login", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "login");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/sendmessage/1", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "lahetaviesti");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/mymessages", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "omatviestit");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/mypages", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "omatesittelysivut");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/newpage", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "esittelysivuuusi");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/page/1", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "esittelysivukatselma");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/page/1/edit", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "esittelysivumuokkaus");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/pagelist", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "esittelysivulistaus");
+        }, new ThymeleafTemplateEngine());
+        
+        
     }
 }
