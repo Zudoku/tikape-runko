@@ -13,7 +13,8 @@
     
     <body>
         <div class="container">
-            <form th:action="@{~/login}" th:object="${loginInfo}" method="post">
+            <h1>Kirjaudu sisään</h1>
+            <form class="lomake" th:action="@{~/login}" th:object="${loginInfo}" method="post">
                 <div class="form-group">
                     <label for="username">Käyttäjäsi nimi</label>
                     <input id="username" name="username" type="text" class="form-control"  placeholder="Nimimerkkisi" />

@@ -12,14 +12,43 @@
     
     
     <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Sovelluksen nimi -->
+                    <a class="navbar-brand" href="#">Ystävänvälityspalvelu</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navigation">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Kirjaudu sisään</a></li>
+                        <li><a href="/register">Rekisteröidy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div class="container">
-            <div class="jumbotron">
-                <h1>Ystävänvälityspalvelu</h1>
-                <small>PariTELE Oy</small>
+            <div class="jumbotron etusivubanner">
+                <h1>Ystävänvälityspalvelu <span class="glyphicon glyphicon-user" aria-hidden="true"></span></h1>
+                <small>PariTELE Oy, vuodesta 2016</small>
                 <p>
                     Rekisteröidy palveluumme ja löydä unelmien ystäväsi! 
-                    Palvelu tarjoaa yksinäisille suomalaisille tavan löytää uusia tuttavuuksia ja ystäviä! Kokeile sinäkin!
+                    Palvelu tarjoaa yksinäisille suomalaisille tavan löytää uusia tuttavuuksia ja ystäviä! 
+                    Kokeile sinäkin ja tuo ystäväsi palveluun mukaan!
                 </p>
+                <h3> Syitä rekisteröityä </h3>
+                <ul>
+                    <li>Edullista</li>
+                    <li>Ei huijareita</li>
+                    <li>Ensimmäinen kuukausi ilmaiseksi</li>
+                    <li>Tutustumishalusia ihmisiä</li>
+                </ul>
                 <a class="btn btn-default" href="#">Rekisteröidy</a>
                 
             </div>

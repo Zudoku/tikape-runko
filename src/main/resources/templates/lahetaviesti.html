@@ -12,9 +12,35 @@
     
     
     <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Sovelluksen nimi -->
+                    <a class="navbar-brand" href="#">Ystävänvälityspalvelu</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navigation">
+                    <ul class="nav navbar-nav">
+                        <!-- Navigaation linkit -->
+                        <li><a href="/myprofile">Omat tiedot</a></li>
+                        <li><a href="/mypages">Omat sivut</a></li>
+                        <li><a href="/sharedpages">Minulle jaetut sivut</a></li>
+                        <li><a href="/pagelist">Selaa sivuja</a></li>
+                        <li><a href="/mymessages">Viestit</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div class="container">
             <h1>Lähetä viesti henkilölle Gajaja2828</h1>
-            <form th:action="@{~/message}" th:object="${messageInfo}" method="post">
+            <form class="lomake" th:action="@{~/message}" th:object="${messageInfo}" method="post">
                 <div class="form-group">
                     <label for="sisalto">Viestin sisältö</label>
                     <textarea id="sisalto" name="sisalto"  class="form-control" rows="5"></textarea>
