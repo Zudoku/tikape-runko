@@ -66,12 +66,12 @@ public class Main {
         
         get("/sharedpages", (req, res) -> {
             HashMap map = new HashMap<>();
-            return new ModelAndView(map, "omattiedot");
+            return new ModelAndView(map, "esittelysivujaetut");
         }, new ThymeleafTemplateEngine());
         
         get("/newpage", (req, res) -> {
             HashMap map = new HashMap<>();
-            return new ModelAndView(map, "esittelysivujaetut");
+            return new ModelAndView(map, "esittelysivuuusi");
         }, new ThymeleafTemplateEngine());
         
         get("/page/1", (req, res) -> {
