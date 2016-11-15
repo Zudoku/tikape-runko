@@ -54,14 +54,24 @@ public class Main {
             return new ModelAndView(map, "omatviestit");
         }, new ThymeleafTemplateEngine());
         
+        get("/myprofile", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "omattiedot");
+        }, new ThymeleafTemplateEngine());
+        
         get("/mypages", (req, res) -> {
             HashMap map = new HashMap<>();
             return new ModelAndView(map, "omatesittelysivut");
         }, new ThymeleafTemplateEngine());
         
+        get("/sharedpages", (req, res) -> {
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "omattiedot");
+        }, new ThymeleafTemplateEngine());
+        
         get("/newpage", (req, res) -> {
             HashMap map = new HashMap<>();
-            return new ModelAndView(map, "esittelysivuuusi");
+            return new ModelAndView(map, "esittelysivujaetut");
         }, new ThymeleafTemplateEngine());
         
         get("/page/1", (req, res) -> {
@@ -69,7 +79,7 @@ public class Main {
             return new ModelAndView(map, "esittelysivukatselma");
         }, new ThymeleafTemplateEngine());
         
-        get("/page/1/edit", (req, res) -> {
+        get("/page/edit/1", (req, res) -> {
             HashMap map = new HashMap<>();
             return new ModelAndView(map, "esittelysivumuokkaus");
         }, new ThymeleafTemplateEngine());
