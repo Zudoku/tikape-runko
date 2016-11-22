@@ -62,10 +62,11 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         statement.setString(2, salasana);
 
         ResultSet result = statement.executeQuery();
-        statement.close();
+
 
         if(result.next()){
             Asiakas loydos = collect(result);
+            statement.close();
             result.close();
             connection.close();
 

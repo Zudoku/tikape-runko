@@ -40,9 +40,10 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
 
         ResultSet result = statement.executeQuery();
 
-        statement.close();
+
         if(result.next()) {
             EsittelySivu loydos = collect(result);
+            statement.close();
             result.close();
             connection.close();
             return loydos;
