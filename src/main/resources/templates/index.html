@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
-                        <li th:hidden="${kirjautunut}"><a href="/myprofile">Omat tiedot</a></li>
+                        <li th:hidden="${kirjautunut}"><a th:href="${'/profile/' + kayttajaid}">Omat tiedot</a></li>
                         <li th:hidden="${kirjautunut}"><a href="/mypages">Omat sivut</a></li>
                         <li th:hidden="${kirjautunut}"><a href="/sharedpages">Minulle jaetut sivut</a></li>
                         <li th:hidden="${kirjautunut}"><a href="/pagelist">Selaa sivuja</a></li>
@@ -39,7 +39,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li th:hidden="${!kirjautunut}"><a href="/login">Kirjaudu sisään</a></li>
                         <li th:hidden="${!kirjautunut}"><a href="/register">Rekisteröidy</a></li>
-                        <li th:hidden="${kirjautunut}"><span th:hidden="${!kirjautunut}" th:text="${'Terve ' + kayttaja}" > Et ole kirjautunut</span></li>
+                        <li th:hidden="${kirjautunut}"><span th:hidden="${kirjautunut}" th:text="${'Terve ' + kayttaja}" > Et ole kirjautunut</span></li>
                     </ul>
                 </div>
             </div>
@@ -48,19 +48,23 @@
             <div class="jumbotron etusivubanner">
                 <h1>Ystävänvälityspalvelu <span class="glyphicon glyphicon-user" aria-hidden="true"></span></h1>
                 <small>PariTELE Oy, vuodesta 2016</small>
-                <p th:hidden="${kirjautunut}">
+                <p th:hidden="${!kirjautunut}">
                     Rekisteröidy palveluumme ja löydä unelmien ystäväsi! 
                     Palvelu tarjoaa yksinäisille suomalaisille tavan löytää uusia tuttavuuksia ja ystäviä! 
                     Kokeile sinäkin ja tuo ystäväsi palveluun mukaan!
                 </p>
-                <h3 th:hidden="${kirjautunut}"> Syitä rekisteröityä </h3>
-                <ul th:hidden="${kirjautunut}">
+                <p th:hidden="${kirjautunut}">
+                    <span th:hidden="${kirjautunut}" th:text="${'Terve ' + kayttaja}" > Et ole kirjautunut</span>
+                </p>
+                <h3 th:hidden="${!kirjautunut}"> Syitä rekisteröityä </h3>
+                <ul th:hidden="${!kirjautunut}">
                     <li>Edullista</li>
                     <li>Ei huijareita</li>
                     <li>Ensimmäinen kuukausi ilmaiseksi</li>
                     <li>Tutustumishalusia ihmisiä</li>
                 </ul>
-                <a th:hidden="${kirjautunut}" class="btn btn-default" href="/register">Rekisteröidy</a>
+                <a th:hidden="${!kirjautunut}" class="btn btn-default" href="/register">Rekisteröidy</a>
+                <a th:hidden="${!kirjautunut}" class="btn btn-default" href="/login">Kirjaudu sisään</a>
                 
             </div>
         </div>
