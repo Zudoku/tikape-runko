@@ -33,9 +33,12 @@ public class Main {
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("kirjautunut", req.session().attribute("kayttaja") != null);
+            boolean kirjautunut = req.session().attribute("kayttaja") != null;
+            map.put("kirjautunut", kirjautunut);
 
-            map.put("kayttaja", ( (Asiakas)req.session().attribute("asiakas")).getKayttajanimi());
+            if(kirjautunut) {
+                map.put("kayttaja", ( (Asiakas)req.session().attribute("asiakas")).getKayttajanimi());
+            }
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
