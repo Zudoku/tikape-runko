@@ -12,5 +12,5 @@ INSERT INTO Esittelysivu (omistaja_id, otsikko, leipateksti, luotu, muokattu, ju
 VALUES (2, 'Etsin juttukaveria','Hei! Olen 27 vuotias ja kaipaan juttukaveria! laita viestiä!',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, true);
 
 
-INSERT INTO Viesti (lahettaja, vastaanottaja, lahtetty, sisalto) 
+INSERT INTO Viesti (lahettaja, vastaanottaja, lahetetty, sisalto)
 VALUES (2, 1,CURRENT_TIMESTAMP,'Hei!  Vaikutat mukavalta! ');
