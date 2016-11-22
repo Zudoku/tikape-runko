@@ -32,6 +32,9 @@ public class Main {
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
+            map.put("kirjautunut", req.session().attribute("kayttaja") != null);
+            map.put("kayttaja", req.session().attribute("asiakas"));
+
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 

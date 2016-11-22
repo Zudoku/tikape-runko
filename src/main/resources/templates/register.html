@@ -1,36 +1,54 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>Ystävänvälityspalvelu</title>
-        <link rel="stylesheet" href="/static/css/bootstrap.css" />
-        <link rel="stylesheet" href="/static/css/ystavapalvelu.css" />
-    </head>
-    
-    
-    <body>
-        <div class="container">
-            <h1>Rekisteröityminen</h1>
-            <form class="lomake" th:action="@{~/register}" th:object="${registerInfo}" method="post">
-                <div class="form-group">
-                    <label for="username">Käyttäjäsi nimi</label>
-                    <input id="username" name="username" type="text" class="form-control"  placeholder="Nimimerkkisi" />
-                </div>
-                <div class="form-group">
-                    <label for="passwd">Salasana</label>
-                    <input id="passwd" name="passwd" type="password" class="form-control"  placeholder="Salasanasi" />
-                </div>
-                <button type="submit" class="btn btn-success">Rekisteröidy</button>
-            </form>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Ystävänvälityspalvelu</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/css/ystavapalvelu.css"/>
+</head>
+
+
+<body>
+<div class="container">
+    <h1>Rekisteröityminen</h1>
+    <form class="lomake" th:action="@{~/register}" th:object="${registerInfo}" method="post">
+        <div class="form-group">
+            <label for="nimimerkki">Nimimerkki</label>
+            <input id="nimimerkki" name="nimimerkki" type="text" class="form-control disabled" placeholder="Nimimerkkisi" />
         </div>
-        <!-- Add jQuery for bootstrap -->
-        <script src="/static/js/jquery.js"></script>
-        <!-- Add Bootstrap -->
-        <script src="/static/js/bootstrap.js"></script>
-    </body>
-    
-    
+        <div class="form-group">
+            <label for="salasana">Salasana</label>
+            <input id="salasana" name="salasana" type="password" class="form-control" placeholder="Salasanasi" />
+        </div>
+        <div class="form-group">
+            <label for="syntymaaika">Syntymäaika</label>
+            <input id="syntymaaika" name="syntymaaika" type="text" class="form-control" placeholder="pp.mm.vvvv" />
+        </div>
+        <div class="form-group">
+            <label for="sukupuoli">Sukupuoli</label>
+            <select id="sukupuoli" name="sukupuoli" class="form-control" value="1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="osoite">Osoite</label>
+            <input id="osoite" name="osoite" type="text" class="form-control" placeholder="jokukatu 11C, Espoo, Suomi" />
+        </div>
+        <button type="submit" class="btn btn-success">Rekisteröidy</button>
+    </form>
+
+
+</div>
+<!-- Add jQuery for bootstrap -->
+<script src="/static/js/jquery.js"></script>
+<!-- Add Bootstrap -->
+<script src="/static/js/bootstrap.js"></script>
+</body>
+
+
 </html>
