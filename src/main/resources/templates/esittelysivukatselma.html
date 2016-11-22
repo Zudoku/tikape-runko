@@ -46,15 +46,15 @@
             <div id="results">
                 <div class="row">
                     <div class="well">
-                        <h3 th:text="${esittelysivu.otsikko}"></h3th:text>
+                        <h3 th:text="${esittelysivu.otsikko}"></h3>
                         <ul>
-                            <li>Toto99112</li>
-                            <li>Julkisuus: Julkinen</li>
-                            <li>Luotu 15.11.2016 17:15</li>
-                            <li>Muokattu 15.11.2016 17:15</li>
+                            <li th:text="${esittelysivu.omistaja_id}">Nimi</li>
+                            <li th:text="${'Julkisuus: ' + esittelysivu.julkinen}">Julkisuus: ???</li>
+                            <li th:text="${'Luotu: ' + esittelysivu.luotu}">Luotu ___</li>
+                            <li th:text="${'Muokattu: ' + esittelysivu.muokattu}">Muokattu 15.11.2016 17:15</li>
                         </ul>
-                        <p>Hei! Etsin kaikenikäistä kaveria pelaamaan kanssani jalkapalloa</p>
-                        <a class="btn btn-default" href="/sendmessage/1">Laita viesti</a>
+                        <p th:text="${esittelysivu.leipateksti}">leipateksti</p>
+                        <a class="btn btn-default" th:href="${'/sendmessage/' + esittelysivu.sivu_id}">Laita viesti</a>
                     </div>
                 </div>
             </div>

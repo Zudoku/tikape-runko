@@ -55,18 +55,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr th:each="esittelysivu : ${esittelysivut}">
                             <td>
-                                <a href="/page/1">Etsin jalkapallokaveria</a>
+                                <a th:href="${'/page/' + esittelysivu.sivu_id}" th:text="${esittelysivu.otsikko}">a</a>
                             </td>
                             <td>
-                                <span>Julkinen</span>
+                                <span th:text="${esittelysivu.julkisuus}">???</span>
                             </td>
                             <td>
-                                <span>Hei! Etsin kaikenikäistä kaveria pelaamaan kanssani jalkapalloa</span>
+                                <span th:text="${esittelysivu.leipateksti}">???</span>
                             </td>
                             <td>
-                                <a href="/page/edit/1" class="btn btn-warning">Muokkaa</a>
+                                <a th:href="{'/page/edit/' + esittelysivu.page_id}" class="btn btn-warning">Muokkaa</a>
                             </td>
                         </tr>
                     </tbody>

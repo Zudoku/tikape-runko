@@ -133,7 +133,7 @@ public class AsiakasController {
             res.redirect("/profile/" + urlID + "?updated=1", 302);
             return "OK";
         });
-        post("/profile/:id/delete", (req, res) -> {
+        get("/profile/:id/delete", (req, res) -> {
             HashMap map = new HashMap<>();
 
             int urlID = Integer.parseInt(req.params("id"));

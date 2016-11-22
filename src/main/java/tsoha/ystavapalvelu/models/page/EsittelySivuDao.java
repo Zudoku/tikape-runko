@@ -68,7 +68,7 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
     public List<EsittelySivu> findAllWithOmistajaId(int omistaja_id) throws SQLException {
         List<EsittelySivu> esittelySivu = new ArrayList<>();
         PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Esittelysivu WHERE " +
-                "omistaja_id ORDER BY muokattu DESC");
+                "omistaja_id=? ORDER BY muokattu DESC");
 
         statement.setInt(1, omistaja_id);
         ResultSet result = statement.executeQuery();

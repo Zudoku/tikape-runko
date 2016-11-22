@@ -43,18 +43,18 @@
         </nav>
 
         <div class="container">
-            <form th:action="@{~/editPage}" th:object="${pageInfo}" method="post">
+            <form th:action="@{~/page/{page_id}/edit(page_id=${esittelysivu.sivu_id})}" th:object="${pageInfo}" method="post">
                 <div class="form-group">
                     <label for="otsikko">Otsikko</label>
-                    <input id="otsikko" name="otsikko" type="text" class="form-control"  placeholder="Esittelysivun otsikko" value="Etsin jalkapallokaveria"/>
+                    <input id="otsikko" name="otsikko" type="text" class="form-control"  placeholder="Esittelysivun otsikko" th:value="${esittelysivu.otsikko}"/>
                 </div>
                 <div class="form-group">
                     <label for="leipateksti">Leipäteksti</label>
-                    <textarea id="leipateksti" name="leipateksti"  class="form-control" rows="10">Hei! Etsin kaikenikäistä kaveria pelaamaan kanssani jalkapalloa</textarea>
+                    <textarea id="leipateksti" name="leipateksti"  class="form-control" rows="10" th:text="${esittelysivu.otsikko}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="julkinen">Sivu on julkinen</label>
-                    <input type="checkbox" id="julkinen" value="julkinen" aria-label="" class="disabled" checked="true"/>
+                    <input type="checkbox" id="julkinen" value="julkinen" aria-label=""  th:checked="${esittelysivu.julkinen}"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Päivitä</button>
                 <a href="#" class="btn btn-danger" > Poista </a>
