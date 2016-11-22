@@ -42,7 +42,7 @@ public class EsittelySivuController {
 
         get("/page/:pageId", (req, res) -> {
             HashMap map = new HashMap<>();
-            Integer pageId = Integer.parseInt(req.queryParams("pageId"));
+            Integer pageId = Integer.parseInt(req.params("pageId"));
             Asiakas sessioAsiakas = req.session().attribute("asiakas");
             EsittelySivu sivu = esittelySivuDao.findOne(pageId);
             if(sessioAsiakas == null || (sessioAsiakas.getId() != sivu.getOmistaja_id() && !sivu.isJulkinen())) {
@@ -60,7 +60,7 @@ public class EsittelySivuController {
 
         get("/page/:pageId/edit", (req, res) -> {
             HashMap map = new HashMap<>();
-            Integer pageId = Integer.parseInt(req.queryParams("pageId"));
+            Integer pageId = Integer.parseInt(req.params("pageId"));
             Asiakas sessioAsiakas = req.session().attribute("asiakas");
             EsittelySivu sivu = esittelySivuDao.findOne(pageId);
             if(sessioAsiakas == null || (sessioAsiakas.getId() != sivu.getOmistaja_id() && !sivu.isJulkinen())) {
