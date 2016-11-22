@@ -29,7 +29,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li th:hidden="${kirjautunut}"><a href="/login">Kirjaudu sisään</a></li>
                         <li th:hidden="${kirjautunut}"><a href="/register">Rekisteröidy</a></li>
-                        <li th:hidden="${!kirjautunut}"><span th:text="${'Terve ' + kayttaja.getKayttajanimi()}" > Et ole kirjautunut</span></li>
+                        <li th:hidden="${!kirjautunut}"><span th:text="${'Terve ' + kayttaja}" > Et ole kirjautunut</span></li>
                     </ul>
                 </div>
             </div>

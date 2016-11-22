@@ -7,6 +7,7 @@ import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tsoha.ystavapalvelu.controller.AsiakasController;
 import tsoha.ystavapalvelu.database.Database;
+import tsoha.ystavapalvelu.models.user.Asiakas;
 
 public class Main {
 
@@ -33,7 +34,8 @@ public class Main {
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("kirjautunut", req.session().attribute("kayttaja") != null);
-            map.put("kayttaja", req.session().attribute("asiakas"));
+
+            map.put("kayttaja", ( (Asiakas)req.session().attribute("asiakas")).getKayttajanimi());
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
