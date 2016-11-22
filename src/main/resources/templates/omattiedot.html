@@ -22,18 +22,21 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- Sovelluksen nimi -->
-                    <a class="navbar-brand" href="#">Ystävänvälityspalvelu</a>
+                    <a class="navbar-brand" href="/">Ystävänvälityspalvelu</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
                         <li class="active" ><a href="/myprofile">Omat tiedot</a></li>
-                        <li><a href="/mypages">Omat sivut</a></li>
+                        <li><a th:href="${'/profile/' + kayttajaid}">Omat sivut</a></li>
                         <li><a href="/sharedpages">Minulle jaetut sivut</a></li>
                         <li><a href="/pagelist">Selaa sivuja</a></li>
                         <li><a href="/mymessages">Viestit</a></li>
                         
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/logout">Kirjaudu ulos</a></li>
                     </ul>
                 </div>
             </div>
@@ -71,7 +74,7 @@
                 </div>
                 <button type="submit" class="btn btn-success">Päivitä</button>
 
-                <a class="btn btn-danger" th:href="${'/profile/' + kayttajaid + '/delete'">Poista Käyttäjä</a>
+                <a class="btn btn-danger" th:href="${'/profile/' + kayttajaid + '/delete'}">Poista Käyttäjä</a>
             </form>
         </div>
         <!-- Add jQuery for bootstrap -->

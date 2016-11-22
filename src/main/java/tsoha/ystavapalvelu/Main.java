@@ -60,20 +60,8 @@ public class Main {
             return new ModelAndView(map, "omatviestit");
         }, new ThymeleafTemplateEngine());
 
-        
 
-        
-        get("/sharedpages", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "esittelysivujaetut");
-        }, new ThymeleafTemplateEngine());
-        
-        get("/newpage", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "esittelysivuuusi");
-        }, new ThymeleafTemplateEngine());
 
-        
 
     }
 }
