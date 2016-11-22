@@ -43,6 +43,9 @@
         </nav>
 
         <div class="container">
+            <div th:hidden="${!updated}" class="alert alert-success">
+                Uusi sivu lisätty!
+            </div>
             <a href="/newpage" class="btn btn-success">Lisää uusi sivu</a>
             <div id="results">
                 <table class="table table-striped">
@@ -66,7 +69,7 @@
                                 <span th:text="${esittelysivu.leipateksti}">???</span>
                             </td>
                             <td>
-                                <a th:href="${'/page/edit/' + esittelysivu.sivu_id}" class="btn btn-warning">Muokkaa</a>
+                                <a th:href="${'/page/' + esittelysivu.sivu_id + '/edit'}" class="btn btn-warning">Muokkaa</a>
                             </td>
                         </tr>
                     </tbody>

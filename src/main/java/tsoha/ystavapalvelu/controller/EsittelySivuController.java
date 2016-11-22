@@ -7,6 +7,7 @@ import tsoha.ystavapalvelu.models.page.EsittelySivu;
 import tsoha.ystavapalvelu.models.page.EsittelySivuDao;
 import tsoha.ystavapalvelu.models.user.Asiakas;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 
 import static spark.Spark.*;
@@ -30,7 +31,7 @@ public class EsittelySivuController {
             if(sessioAsiakas == null) {
                 res.redirect("/?norights=1", 302);
             }
-
+            map.put("updated", "1".equals(req.queryParams("updated")));
             map.put("kirjautunut", false);
             map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
             map.put("kayttajaid",  sessioAsiakas.getId());
@@ -48,6 +49,8 @@ public class EsittelySivuController {
             if(sessioAsiakas == null || (sessioAsiakas.getId() != sivu.getOmistaja_id() && !sivu.isJulkinen())) {
                 res.redirect("/?norights=1", 302);
             }
+
+            map.put("mypage", sessioAsiakas.getId() == sivu.getOmistaja_id());
 
             map.put("kirjautunut", false);
             map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
@@ -111,6 +114,27 @@ public class EsittelySivuController {
 
             return new ModelAndView(map, "esittelysivuuusi");
         }, new ThymeleafTemplateEngine());
+
+        post("/newpage", (req, res) -> {
+            HashMap map = new HashMap<>();
+
+            Asiakas sessioAsiakas = req.session().attribute("asiakas");
+            if(sessioAsiakas == null) {
+                res.redirect("/?norights=1", 302);
+            }
+            String otsikko = req.queryParams("otsikko");
+            String leipateksti = req.queryParams("leipateksti");
+            boolean julkinen = Boolean.parseBoolean(req.queryParams("julkinen"));
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            EsittelySivu sivu = new EsittelySivu(-1, sessioAsiakas.getId(), otsikko, leipateksti, now, now, julkinen );
+
+            esittelySivuDao.add(sivu);
+
+            res.redirect("/mypages?added=1", 302);
+
+
+            return "OK";
+        });
 
     }
 }

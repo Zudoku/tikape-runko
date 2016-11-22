@@ -2,6 +2,7 @@ package tsoha.ystavapalvelu.models.page;
 
 import tsoha.ystavapalvelu.database.Dao;
 import tsoha.ystavapalvelu.database.Database;
+import tsoha.ystavapalvelu.models.user.Asiakas;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -104,5 +105,20 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         statement.executeUpdate();
 
         return findOne(esittelySivu.getSivu_id());
+    }
+
+    public void add(EsittelySivu esittelySivu) throws SQLException {
+        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Esittelysivu " +
+                "(omistaja_id, otsikko, leipateksti, luotu, muokattu, julkinen) VALUES (?,?,?,?,?,?)");
+
+        statement.setInt(1, esittelySivu.getOmistaja_id());
+        statement.setString(2, esittelySivu.getOtsikko());
+        statement.setString(3, esittelySivu.getLeipateksti());
+        statement.setTimestamp(4, esittelySivu.getLuotu());
+        statement.setTimestamp(5, esittelySivu.getMuokattu());
+        statement.setBoolean(6, esittelySivu.isJulkinen());
+
+        statement.execute();
+
     }
 }
