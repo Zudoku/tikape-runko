@@ -99,6 +99,9 @@ public class AsiakasController {
             boolean updated = "1".equals(req.queryParams("updated"));
             map.put("updated", updated);
 
+            map.put("kayttaja", sessioAsiakas.getKayttajanimi());
+            map.put("kayttajaid", sessioAsiakas.getId());
+
             return new ModelAndView(map, "omattiedot");
         }, new ThymeleafTemplateEngine());
 
