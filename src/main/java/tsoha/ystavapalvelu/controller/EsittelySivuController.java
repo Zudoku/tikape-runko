@@ -32,7 +32,7 @@ public class EsittelySivuController {
                 res.redirect("/?norights=1", 302);
             }
             map.put("updated", "1".equals(req.queryParams("updated")));
-            map.put("edited", "1".equals(req.queryParams("edited")));
+            map.put("added", "1".equals(req.queryParams("added")));
             map.put("deleted", "1".equals(req.queryParams("deleted")));
             map.put("kirjautunut", false);
             map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
@@ -138,7 +138,7 @@ public class EsittelySivuController {
             return "OK";
         });
 
-        post("/post/:postId/edit", (req, res) -> {
+        post("/page/:postId/edit", (req, res) -> {
             HashMap map = new HashMap<>();
             Integer postId = Integer.parseInt(req.params("postId"));
             EsittelySivu sivu = esittelySivuDao.findOne(postId);
@@ -163,7 +163,7 @@ public class EsittelySivuController {
             return "OK";
         });
 
-        get("/post/:postId/delete", (req, res) -> {
+        get("/page/:postId/delete", (req, res) -> {
             HashMap map = new HashMap<>();
             Integer postId = Integer.parseInt(req.params("postId"));
             EsittelySivu sivu = esittelySivuDao.findOne(postId);

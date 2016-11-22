@@ -43,10 +43,10 @@
         </nav>
 
         <div class="container">
-            <div th:hidden="${!updated}" class="alert alert-success">
+            <div th:hidden="${!added}" class="alert alert-success">
                 Uusi sivu lisätty!
             </div>
-            <div th:hidden="${!edited}" class="alert alert-primary">
+            <div th:hidden="${!updated}" class="alert alert-primary">
                 Sivua muokattu!
             </div>
             <div th:hidden="${!deleted}" class="alert alert-warning">
