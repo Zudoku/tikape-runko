@@ -42,9 +42,10 @@ public class EsittelySivuController {
 
         get("/page/:pageId", (req, res) -> {
             HashMap map = new HashMap<>();
-
+            Integer pageId = Integer.parseInt(req.queryParams("pageId"));
             Asiakas sessioAsiakas = req.session().attribute("asiakas");
-            if(sessioAsiakas == null) {
+            EsittelySivu sivu = esittelySivuDao.findOne(pageId);
+            if(sessioAsiakas == null || (sessioAsiakas.getId() != sivu.getOmistaja_id() && !sivu.isJulkinen())) {
                 res.redirect("/?norights=1", 302);
             }
 
@@ -52,11 +53,26 @@ public class EsittelySivuController {
             map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
             map.put("kayttajaid",  sessioAsiakas.getId());
 
+            map.put("esittelysivu", sivu);
+
             return new ModelAndView(map, "esittelysivukatselma");
         }, new ThymeleafTemplateEngine());
 
         get("/page/:pageId/edit", (req, res) -> {
             HashMap map = new HashMap<>();
+            Integer pageId = Integer.parseInt(req.queryParams("pageId"));
+            Asiakas sessioAsiakas = req.session().attribute("asiakas");
+            EsittelySivu sivu = esittelySivuDao.findOne(pageId);
+            if(sessioAsiakas == null || (sessioAsiakas.getId() != sivu.getOmistaja_id() && !sivu.isJulkinen())) {
+                res.redirect("/?norights=1", 302);
+            }
+
+            map.put("kirjautunut", false);
+            map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
+            map.put("kayttajaid",  sessioAsiakas.getId());
+
+            map.put("esittelysivu", sivu);
+
             return new ModelAndView(map, "esittelysivumuokkaus");
         }, new ThymeleafTemplateEngine());
 

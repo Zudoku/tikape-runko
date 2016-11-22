@@ -60,7 +60,7 @@
                                 <a th:href="${'/page/' + esittelysivu.sivu_id}" th:text="${esittelysivu.otsikko}">a</a>
                             </td>
                             <td>
-                                <span th:text="${esittelysivu.julkisuus}">???</span>
+                                <span th:text="${esittelysivu.julkisuus ? 'Julkinen' : 'Yksityinen'}">???</span>
                             </td>
                             <td>
                                 <span th:text="${esittelysivu.leipateksti}">???</span>

@@ -148,6 +148,7 @@ public class AsiakasController {
 
             asiakasDao.delete(urlID);
             req.session(true);
+            req.session().removeAttribute("asiakas");
             res.redirect("/", 302);
 
             return "OK";
