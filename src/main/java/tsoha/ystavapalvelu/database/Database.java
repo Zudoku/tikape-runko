@@ -56,14 +56,14 @@ public class Database {
     private List<String> sqliteLauseet() {
         ArrayList<String> lista = new ArrayList<>();
         List<String> files = new ArrayList<>();
-        files.add("drop_tables.sql");
-        files.add("create_tables.sql");
-        files.add("add_test_data.sql");
+        files.add("sql/drop_tables.sql");
+        files.add("sql/create_tables.sql");
+        files.add("sql/add_test_data.sql");
 
 
         for(String file : files) {
             StringBuffer stringBuffer = new StringBuffer();
-            InputStream stream = Database.class.getResourceAsStream(file);
+            InputStream stream = getClass().getClassLoader().getResourceAsStream(file); //Database.class.getResourceAsStream(file);
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(stream,"UTF-8"));
                 String s;
