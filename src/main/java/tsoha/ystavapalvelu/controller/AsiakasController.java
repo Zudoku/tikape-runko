@@ -148,6 +148,16 @@ public class AsiakasController {
 
             return "OK";
         });
+
+        get("/logout", (req, res) -> {
+            Asiakas sessioAsiakas = req.session().attribute("asiakas");
+            if(sessioAsiakas != null) {
+                req.session(true);
+            }
+            res.redirect("/login", 302);
+
+            return "OK";
+        });
     }
 
 }
