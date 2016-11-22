@@ -1,5 +1,6 @@
 package tsoha.ystavapalvelu.database;
 
+import java.io.*;
 import java.net.URI;
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,26 +12,6 @@ public class Database {
 
     public Database(String databaseAddress) throws ClassNotFoundException {
         this.databaseAddress = databaseAddress;
-    }
-    
-    public String testDatabaseConnection() throws SQLException{
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Connection connection = getConnection();
-
-        try {
-            stmt = connection.prepareStatement("SELECT * FROM Testing");
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getString("nimi");
-            } else {
-                return null;
-            }
-        } finally {
-            if (stmt != null) stmt.close();
-            if (rs != null) rs.close();
-            connection.close();
-        }
     }
 
     public Connection getConnection() throws SQLException {
@@ -57,6 +38,7 @@ public class Database {
 
         // "try with resources" sulkee resurssin automaattisesti lopuksi
         try (Connection conn = getConnection()) {
+
             Statement st = conn.createStatement();
 
             // suoritetaan komennot
@@ -73,11 +55,35 @@ public class Database {
 
     private List<String> sqliteLauseet() {
         ArrayList<String> lista = new ArrayList<>();
+        List<String> files = new ArrayList<>();
+        files.add("drop_tables.sql");
+        files.add("create_tables.sql");
+        files.add("add_test_data.sql");
 
-        // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
-        lista.add("DROP TABLE IF EXISTS Testing;");
-        lista.add("CREATE TABLE Testing (id integer PRIMARY KEY, nimi varchar(255));");
-        lista.add("INSERT INTO Testing (id,nimi) VALUES (1,'TOIMII');");
+
+        for(String file : files) {
+            StringBuffer stringBuffer = new StringBuffer();
+            InputStream stream = Database.class.getResourceAsStream(file);
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(stream,"UTF-8"));
+                String s;
+                while((s = reader.readLine()) != null) {
+                    stringBuffer.append(s);
+                }
+                reader.close();
+                String[] statements = stringBuffer.toString().split(";");
+                for(int i = 0; i < statements.length; i++) {
+                    lista.add(statements[i]);
+                }
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
 
         return lista;
     }
