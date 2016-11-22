@@ -27,7 +27,7 @@ CREATE TABLE Ystavapari (
 CREATE TABLE Viesti (
     lahettaja integer REFERENCES Asiakas (id),
     vastaanottaja integer REFERENCES Asiakas (id),
-    lahtetty timestamp NOT NULL,
+    lahetetty timestamp NOT NULL,
     sisalto varchar(500) NOT NULL
 );
 
