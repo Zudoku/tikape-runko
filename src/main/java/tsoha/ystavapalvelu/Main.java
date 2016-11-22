@@ -37,9 +37,11 @@ public class Main {
             HashMap map = new HashMap<>();
             boolean kirjautunut = req.session().attribute("asiakas") != null;
             map.put("kirjautunut", !kirjautunut);
+            map.put("norights", "1".equals(req.queryParams("norights")));
             if(kirjautunut) {
                 map.put("kayttaja", ( (Asiakas)req.session().attribute("asiakas")).getKayttajanimi());
                 map.put("kayttajaid", ( (Asiakas)req.session().attribute("asiakas")).getId());
+
             }
 
             return new ModelAndView(map, "index");

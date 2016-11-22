@@ -53,6 +53,9 @@
                     Palvelu tarjoaa yksinäisille suomalaisille tavan löytää uusia tuttavuuksia ja ystäviä! 
                     Kokeile sinäkin ja tuo ystäväsi palveluun mukaan!
                 </p>
+                <div th:hidden="${norights}" class="alert alert-danger">
+                    Sinulla ei ole tarvittavia oikeuksia!
+                </div>
                 <p th:hidden="${kirjautunut}">
                     <span th:hidden="${kirjautunut}" th:text="${'Terve ' + kayttaja}" > Et ole kirjautunut</span>
                 </p>

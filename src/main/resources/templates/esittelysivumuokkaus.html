@@ -50,14 +50,14 @@
                 </div>
                 <div class="form-group">
                     <label for="leipateksti">Leipäteksti</label>
-                    <textarea id="leipateksti" name="leipateksti"  class="form-control" rows="10" th:text="${esittelysivu.otsikko}"></textarea>
+                    <textarea id="leipateksti" name="leipateksti"  class="form-control" rows="10" th:text="${esittelysivu.leipateksti}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="julkinen">Sivu on julkinen</label>
                     <input type="checkbox" id="julkinen" value="julkinen" aria-label=""  th:checked="${esittelysivu.julkinen}"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Päivitä</button>
-                <a href="#" class="btn btn-danger" > Poista </a>
+                <a th:href="${'/post/' + esittelysivu.sivu_id + '/delete'}" class="btn btn-danger" > Poista </a>
             </form>
         </div>
         <!-- Add jQuery for bootstrap -->

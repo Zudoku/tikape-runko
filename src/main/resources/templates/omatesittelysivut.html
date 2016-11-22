@@ -46,6 +46,12 @@
             <div th:hidden="${!updated}" class="alert alert-success">
                 Uusi sivu lisätty!
             </div>
+            <div th:hidden="${!edited}" class="alert alert-primary">
+                Sivua muokattu!
+            </div>
+            <div th:hidden="${!deleted}" class="alert alert-warning">
+                Sivu poistettu!
+            </div>
             <a href="/newpage" class="btn btn-success">Lisää uusi sivu</a>
             <div id="results">
                 <table class="table table-striped">

@@ -32,6 +32,8 @@ public class EsittelySivuController {
                 res.redirect("/?norights=1", 302);
             }
             map.put("updated", "1".equals(req.queryParams("updated")));
+            map.put("edited", "1".equals(req.queryParams("edited")));
+            map.put("deleted", "1".equals(req.queryParams("deleted")));
             map.put("kirjautunut", false);
             map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
             map.put("kayttajaid",  sessioAsiakas.getId());
@@ -131,6 +133,47 @@ public class EsittelySivuController {
             esittelySivuDao.add(sivu);
 
             res.redirect("/mypages?added=1", 302);
+
+
+            return "OK";
+        });
+
+        post("/post/:postId/edit", (req, res) -> {
+            HashMap map = new HashMap<>();
+            Integer postId = Integer.parseInt(req.params("postId"));
+            EsittelySivu sivu = esittelySivuDao.findOne(postId);
+            Asiakas sessioAsiakas = req.session().attribute("asiakas");
+            if(sessioAsiakas == null || sivu.getOmistaja_id() != sessioAsiakas.getId()) {
+                res.redirect("/?norights=1", 302);
+            }
+            String otsikko = req.queryParams("otsikko");
+            String leipateksti = req.queryParams("leipateksti");
+            boolean julkinen = Boolean.parseBoolean(req.queryParams("julkinen"));
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            sivu.setOtsikko(otsikko);
+            sivu.setLeipateksti(leipateksti);
+            sivu.setJulkinen(julkinen);
+            sivu.setMuokattu(now);
+
+            esittelySivuDao.update(sivu);
+
+            res.redirect("/mypages?edited=1", 302);
+
+
+            return "OK";
+        });
+
+        get("/post/:postId/delete", (req, res) -> {
+            HashMap map = new HashMap<>();
+            Integer postId = Integer.parseInt(req.params("postId"));
+            EsittelySivu sivu = esittelySivuDao.findOne(postId);
+            Asiakas sessioAsiakas = req.session().attribute("asiakas");
+            if(sessioAsiakas == null || sivu.getOmistaja_id() != sessioAsiakas.getId()) {
+                res.redirect("/?norights=1", 302);
+            }
+            esittelySivuDao.delete(sivu.getSivu_id());
+
+            res.redirect("/mypages?deleted=1", 302);
 
 
             return "OK";
