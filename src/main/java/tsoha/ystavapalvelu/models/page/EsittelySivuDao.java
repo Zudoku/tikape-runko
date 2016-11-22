@@ -65,6 +65,22 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         return esittelySivu;
     }
 
+    public List<EsittelySivu> findAllWithOmistajaId(int omistaja_id) throws SQLException {
+        List<EsittelySivu> esittelySivu = new ArrayList<>();
+        PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Esittelysivu WHERE " +
+                "omistaja_id ORDER BY muokattu DESC");
+
+        statement.setInt(1, omistaja_id);
+        ResultSet result = statement.executeQuery();
+
+        while(result.next()){
+            esittelySivu.add(collect(result));
+        }
+
+
+        return esittelySivu;
+    }
+
     @Override
     public void delete(Integer key) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("DELETE FROM Esittelysivu WHERE sivu_id=?");

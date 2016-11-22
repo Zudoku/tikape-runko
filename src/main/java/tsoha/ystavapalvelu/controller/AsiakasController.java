@@ -51,6 +51,7 @@ public class AsiakasController {
             try {
                 asiakasDao.add(uusiAsiakas);
             } catch (SQLException exception) {
+                System.out.println(exception.getMessage());
                 res.redirect("/register?badcreds=1", 302);
                 return "OK";
             }
@@ -158,6 +159,8 @@ public class AsiakasController {
 
             return "OK";
         });
+
+
     }
 
 }

@@ -40,7 +40,7 @@
         </nav>
 
         <div class="container">
-            <form class="lomake" th:action="@{~/}" th:object="${pageInfo}" method="post">
+            <form class="lomake" th:action="@{~/profile/{profileId}/update(profileId=${kayttajaid})}" th:object="${pageInfo}" method="post">
                 <div class="form-group">
                     <label for="nimimerkki">Nimimerkki</label>
                     <input id="nimimerkki" name="nimimerkki" type="text" class="form-control disabled" placeholder="" value="Toto99112" />
@@ -71,7 +71,7 @@
                 </div>
                 <button type="submit" class="btn btn-success">Päivitä</button>
 
-                <button type="submit" class="btn btn-danger">Poista</button>
+                <a class="btn btn-danger" th:href="${'/profile/' + kayttajaid + '/delete'">Poista Käyttäjä</a>
             </form>
         </div>
         <!-- Add jQuery for bootstrap -->

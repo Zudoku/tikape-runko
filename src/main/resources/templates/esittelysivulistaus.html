@@ -40,29 +40,18 @@
 
         <div class="container">
             <div id="results">
-                <div class="row">
+                <div th:each="esittelysivu : esittelysivut" class="row">
                     <div class="well">
-                        <h3>Etsin jalkapallokaveria</h3>
+                        <h3 th:text="${esittelysivu.otsikko}"></h3>
                         <ul>
-                            <li>Toto99112</li>
-                            <li>Luotu 15.11.2016 17:15</li>
+                            <li>Luojan ID <span th:text="${esittelysivu.omistaja_id}"></span></li>
+                            <li>Luotu <span th:text="${esittelysivu.luotu}"></span></li>
                         </ul>
-                        <p>Hei! Etsin kaikenikäistä kaveria pelaamaan kanssani jalkapalloa</p>
-                        <a class="btn btn-default" href="/page/1">Lue lisää</a>
+                        <p th:text="${esittelysivu.leipateksti}"></p>
+                        <a class="btn btn-default" th:href="${'/page/' + esittelysivu.sivu_id}">Lue lisää</a>
                     </div>
                 </div>
-                
-                <div class="row">
-                    <div class="well">
-                        <h3>Etsin juttukaveria</h3>
-                        <ul>
-                            <li>Gajaja2828</li>
-                            <li>Luotu 15.11.2016 17:15</li>
-                        </ul>
-                        <p>Hei! Olen 27 vuotias ja kaipaan juttukaveria! laita viestiä!</p>
-                        <a class="btn btn-default" href="/page/1">Lue lisää</a>
-                    </div>
-                </div>
+
             </div>
         </div>
         <!-- Add jQuery for bootstrap -->

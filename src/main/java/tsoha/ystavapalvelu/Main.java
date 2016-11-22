@@ -6,7 +6,9 @@ import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tsoha.ystavapalvelu.controller.AsiakasController;
+import tsoha.ystavapalvelu.controller.EsittelySivuController;
 import tsoha.ystavapalvelu.database.Database;
+import tsoha.ystavapalvelu.models.page.EsittelySivu;
 import tsoha.ystavapalvelu.models.user.Asiakas;
 
 public class Main {
@@ -44,7 +46,7 @@ public class Main {
         }, new ThymeleafTemplateEngine());
 
         AsiakasController asiakasController = new AsiakasController(database);
-
+        EsittelySivuController esittelySivuController = new EsittelySivuController(database);
         
 
         
@@ -59,10 +61,7 @@ public class Main {
         }, new ThymeleafTemplateEngine());
 
         
-        get("/mypages", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "omatesittelysivut");
-        }, new ThymeleafTemplateEngine());
+
         
         get("/sharedpages", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -73,22 +72,8 @@ public class Main {
             HashMap map = new HashMap<>();
             return new ModelAndView(map, "esittelysivuuusi");
         }, new ThymeleafTemplateEngine());
+
         
-        get("/page/1", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "esittelysivukatselma");
-        }, new ThymeleafTemplateEngine());
-        
-        get("/page/edit/1", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "esittelysivumuokkaus");
-        }, new ThymeleafTemplateEngine());
-        
-        get("/pagelist", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "esittelysivulistaus");
-        }, new ThymeleafTemplateEngine());
-        
-        
+
     }
 }
