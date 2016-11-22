@@ -46,7 +46,7 @@
             <div id="results">
                 <div class="row">
                     <div class="well">
-                        <h3 th:text="${esittelysivu.otsikko}"></h3>
+                        <strong><span th:text="${esittelysivu.otsikko}">__</span></strong>
                         <ul>
                             <li th:text="${esittelysivu.omistaja_id}">Nimi</li>
                             <li th:text="${'Julkisuus: ' + esittelysivu.julkinen}">Julkisuus: ???</li>
