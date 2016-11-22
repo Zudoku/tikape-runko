@@ -4,10 +4,7 @@ import tsoha.ystavapalvelu.database.Dao;
 import tsoha.ystavapalvelu.database.Database;
 import tsoha.ystavapalvelu.models.user.Asiakas;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,24 +33,29 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
 
     @Override
     public EsittelySivu findOne(Integer key) throws SQLException {
-
-        PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Esittelysivu WHERE sivu_id=?");
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM Esittelysivu WHERE sivu_id=?");
 
         statement.setInt(1, key);
 
         ResultSet result = statement.executeQuery();
 
+        statement.close();
         if(result.next()) {
-            return collect(result);
+            EsittelySivu loydos = collect(result);
+            result.close();
+            connection.close();
+            return loydos;
         }
-
+        connection.close();
         return null;
     }
 
     @Override
     public List<EsittelySivu> findAll() throws SQLException {
         List<EsittelySivu> esittelySivu = new ArrayList<>();
-        PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Esittelysivu WHERE " +
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM Esittelysivu WHERE " +
                 "julkinen=true ORDER BY muokattu DESC");
 
         ResultSet result = statement.executeQuery();
@@ -61,6 +63,9 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         while(result.next()){
             esittelySivu.add(collect(result));
         }
+        statement.close();
+        result.close();
+        connection.close();
 
 
         return esittelySivu;
@@ -68,7 +73,8 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
 
     public List<EsittelySivu> findAllWithOmistajaId(int omistaja_id) throws SQLException {
         List<EsittelySivu> esittelySivu = new ArrayList<>();
-        PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Esittelysivu WHERE " +
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM Esittelysivu WHERE " +
                 "omistaja_id=? ORDER BY muokattu DESC");
 
         statement.setInt(1, omistaja_id);
@@ -77,22 +83,29 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         while(result.next()){
             esittelySivu.add(collect(result));
         }
-
+        statement.close();
+        result.close();
+        connection.close();
 
         return esittelySivu;
     }
 
     @Override
     public void delete(Integer key) throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("DELETE FROM Esittelysivu WHERE sivu_id=?");
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM Esittelysivu WHERE sivu_id=?");
         statement.setInt(1, key);
 
         statement.execute();
+        statement.close();
+        connection.close();
 
     }
 
     public EsittelySivu update(EsittelySivu esittelySivu) throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("UPDATE EsittelySivu SET " +
+        Connection connection = database.getConnection();
+
+        PreparedStatement statement = connection.prepareStatement("UPDATE EsittelySivu SET " +
                 "otsikko=?, leipateksti=?, muokattu=?, julkinen=? WHERE sivu_id=?");
 
 
@@ -105,12 +118,15 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
 
 
         statement.executeUpdate();
+        statement.close();
+        connection.close();
 
         return findOne(esittelySivu.getSivu_id());
     }
 
     public void add(EsittelySivu esittelySivu) throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Esittelysivu " +
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Esittelysivu " +
                 "(omistaja_id, otsikko, leipateksti, luotu, muokattu, julkinen) VALUES (?,?,?,?,?,?)");
 
         statement.setInt(1, esittelySivu.getOmistaja_id());
@@ -121,6 +137,8 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         statement.setBoolean(6, esittelySivu.isJulkinen());
 
         statement.execute();
+        statement.close();
+        connection.close();
 
     }
 }

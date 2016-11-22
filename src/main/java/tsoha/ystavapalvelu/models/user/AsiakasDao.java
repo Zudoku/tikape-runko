@@ -3,6 +3,7 @@ package tsoha.ystavapalvelu.models.user;
 import tsoha.ystavapalvelu.database.Dao;
 import tsoha.ystavapalvelu.database.Database;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,35 +35,49 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
     @Override
     public Asiakas findOne(Integer key) throws SQLException {
         PreparedStatement statement;
-
-        statement = database.getConnection().prepareStatement("SELECT * FROM Asiakas WHERE id=?");
+        Connection connection = database.getConnection();
+        statement = connection.prepareStatement("SELECT * FROM Asiakas WHERE id=?");
         statement.setInt(1,key);
 
         ResultSet result = statement.executeQuery();
 
         if(result.next()){
-            return collect(result);
+            Asiakas loydos = collect(result);
+            statement.close();
+            result.close();
+            connection.close();
+            return loydos;
         }
+        statement.close();
+        connection.close();
         return null;
     }
 
 
     public Asiakas getAsiakasFromCredentials(String kayttajanimi, String salasana) throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Asiakas WHERE kayttajanimi=? AND salasana=?");
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM Asiakas WHERE kayttajanimi=? AND salasana=?");
 
         statement.setString(1, kayttajanimi);
         statement.setString(2, salasana);
 
         ResultSet result = statement.executeQuery();
+        statement.close();
 
         if(result.next()){
-            return collect(result);
+            Asiakas loydos = collect(result);
+            result.close();
+            connection.close();
+
+            return loydos;
         }
+        connection.close();
         return null;
     }
 
     public Asiakas update(Asiakas asiakas) throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Asiakas SET " +
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("UPDATE Asiakas SET " +
                 "salasana=?, syntymaaika=?, sukupuoli=?, osoite=? WHERE id=?");
 
 
@@ -75,6 +90,9 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
 
         statement.executeUpdate();
 
+        statement.close();
+        connection.close();
+
         return findOne(asiakas.getId());
 
     }
@@ -82,28 +100,34 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
     @Override
     public List<Asiakas> findAll() throws SQLException {
         List<Asiakas> asiakkaat = new ArrayList<>();
-
-        PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM Asiakas");
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM Asiakas");
 
         ResultSet results = statement.executeQuery();
 
         while(results.next()){
             asiakkaat.add(collect(results));
         }
-
+        statement.close();
+        results.close();
+        connection.close();
         return asiakkaat;
     }
 
     @Override
     public void delete(Integer key) throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("DELETE FROM Asiakas WHERE id=?");
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM Asiakas WHERE id=?");
 
         statement.setInt(1, key);
         statement.execute();
+        statement.close();
+        connection.close();
     }
 
     public void add(Asiakas asiakas) throws SQLException {
-        PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO Asiakas " +
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Asiakas " +
                 "(kayttajanimi, salasana, syntymaaika, sukupuoli, liittynyt, osoite) VALUES (?,?,?,?,?,?)");
 
         statement.setString(1, asiakas.getKayttajanimi());
@@ -114,6 +138,9 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         statement.setString(6, asiakas.getOsoite());
 
         statement.execute();
+
+        statement.close();
+        connection.close();
 
     }
 }
