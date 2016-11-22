@@ -63,13 +63,15 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
 
     public Asiakas update(Asiakas asiakas) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE Asiakas SET " +
-                "salasana=?, syntymaaika=?, sukupuoli=?, osoite=?");
+                "salasana=?, syntymaaika=?, sukupuoli=?, osoite=? WHERE id=?");
 
 
         statement.setString(1, asiakas.getSalasana());
         statement.setDate(2, new java.sql.Date(asiakas.getSyntymaaika().getTime()));
         statement.setInt(3, asiakas.getSukupuoli());
         statement.setString(4, asiakas.getOsoite());
+
+        statement.setInt(5, asiakas.getId());
 
         statement.executeUpdate();
 
