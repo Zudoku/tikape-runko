@@ -31,7 +31,7 @@ public class EsittelySivuController {
             if(sessioAsiakas == null) {
                 res.redirect("/?norights=1", 302);
             }
-            map.put("updated", "1".equals(req.queryParams("updated")));
+            map.put("edited", "1".equals(req.queryParams("edited")));
             map.put("added", "1".equals(req.queryParams("added")));
             map.put("deleted", "1".equals(req.queryParams("deleted")));
             map.put("kirjautunut", false);

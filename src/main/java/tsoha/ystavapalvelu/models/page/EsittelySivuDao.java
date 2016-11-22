@@ -93,13 +93,15 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
 
     public EsittelySivu update(EsittelySivu esittelySivu) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("UPDATE EsittelySivu SET " +
-                "otsikko=?, leipateksti=?, muokattu=?, julkinen=?");
+                "otsikko=?, leipateksti=?, muokattu=?, julkinen=? WHERE sivu_id=?");
 
 
         statement.setString(1, esittelySivu.getOtsikko());
         statement.setString(2, esittelySivu.getLeipateksti());
         statement.setDate(3, new java.sql.Date(esittelySivu.getMuokattu().getTime()));
         statement.setBoolean(4, esittelySivu.isJulkinen());
+
+        statement.setInt(5, esittelySivu.getSivu_id());
 
 
         statement.executeUpdate();

@@ -94,7 +94,7 @@ public class AsiakasController {
                 res.redirect("/login", 302);
 
             } else if(sessioAsiakas.getId() != urlID) {
-                res.redirect("/", 302);
+                res.redirect("/?norights=1", 302);
             }
             boolean updated = "1".equals(req.queryParams("updated"));
             map.put("updated", updated);
@@ -114,7 +114,7 @@ public class AsiakasController {
                 res.redirect("/login", 302);
 
             } else if(sessioAsiakas.getId() != urlID) {
-                res.redirect("/", 302);
+                res.redirect("/?norights=1", 302);
             }
             sessioAsiakas.setOsoite(req.queryParams("osoite"));
             sessioAsiakas.setSalasana(req.queryParams("salasana"));
@@ -142,7 +142,7 @@ public class AsiakasController {
                 res.redirect("/login", 302);
 
             } else if(sessioAsiakas.getId() != urlID) {
-                res.redirect("/", 302);
+                res.redirect("/?norights=1", 302);
             }
 
 
