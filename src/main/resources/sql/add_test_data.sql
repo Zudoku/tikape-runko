@@ -1,5 +1,5 @@
 INSERT INTO Asiakas (kayttajanimi, salasana, syntymaaika, sukupuoli, liittynyt, osoite)
-VALUES ('Toto99112', 'salainensalasana',CURRENT_DATE,1,CURRENT_DATE,'jokukatu 11C, Espoo, Suomi');
+VALUES ('Toto99112', 'test',CURRENT_DATE,1,CURRENT_DATE,'jokukatu 11C, Espoo, Suomi');
 
 INSERT INTO Asiakas (kayttajanimi, salasana, syntymaaika, sukupuoli, liittynyt, osoite) 
 VALUES ('Gajaja2828', 'salainensalasana2',CURRENT_DATE,1,CURRENT_DATE,'jokukatu 12C, Espoo, Suomi');
