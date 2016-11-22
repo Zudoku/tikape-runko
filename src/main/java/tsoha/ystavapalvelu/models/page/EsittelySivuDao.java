@@ -69,7 +69,7 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
     public void delete(Integer key) throws SQLException {
         PreparedStatement statement = database.getConnection().prepareStatement("DELETE FROM Esittelysivu WHERE sivu_id=?");
         statement.setInt(1, key);
-        
+
         statement.execute();
 
     }

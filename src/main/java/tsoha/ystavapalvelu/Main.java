@@ -5,6 +5,7 @@ import spark.ModelAndView;
 import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import tsoha.ystavapalvelu.controller.AsiakasController;
 import tsoha.ystavapalvelu.database.Database;
 
 public class Main {
@@ -33,16 +34,11 @@ public class Main {
             HashMap map = new HashMap<>();
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
+
+        AsiakasController asiakasController = new AsiakasController(database);
+
         
-        get("/register", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "register");
-        }, new ThymeleafTemplateEngine());
-        
-        get("/login", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "login");
-        }, new ThymeleafTemplateEngine());
+
         
         get("/sendmessage/1", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -53,11 +49,7 @@ public class Main {
             HashMap map = new HashMap<>();
             return new ModelAndView(map, "omatviestit");
         }, new ThymeleafTemplateEngine());
-        
-        get("/myprofile", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "omattiedot");
-        }, new ThymeleafTemplateEngine());
+
         
         get("/mypages", (req, res) -> {
             HashMap map = new HashMap<>();
