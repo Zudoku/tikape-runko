@@ -152,9 +152,9 @@ public class AsiakasController {
         get("/logout", (req, res) -> {
             Asiakas sessioAsiakas = req.session().attribute("asiakas");
             if(sessioAsiakas != null) {
-                req.session(true);
+                req.session().removeAttribute("asiakas");
             }
-            res.redirect("/login", 302);
+            res.redirect("/", 302);
 
             return "OK";
         });
