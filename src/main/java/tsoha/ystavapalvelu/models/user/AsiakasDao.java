@@ -25,7 +25,7 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         String salasana = results.getString("salasana");
         Date syntymaaika = results.getDate("syntymaaika");
         int sukupuoli = results.getInt("sukupuoli");
-        Date littynyt = results.getDate("littynyt");
+        Date littynyt = results.getDate("liittynyt");
         String osoite  = results.getString("osoite");
 
         return new Asiakas(id, kayttajanimi, salasana, syntymaaika, sukupuoli, littynyt, osoite);
