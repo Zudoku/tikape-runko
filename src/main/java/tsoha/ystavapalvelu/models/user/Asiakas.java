@@ -78,4 +78,17 @@ public class Asiakas {
     public void setOsoite(String osoite) {
         this.osoite = osoite;
     }
+
+    @Override
+    public String toString() {
+        return "Asiakas{" +
+                "id=" + id +
+                ", kayttajanimi='" + kayttajanimi + '\'' +
+                ", salasana='" + salasana + '\'' +
+                ", syntymaaika=" + syntymaaika +
+                ", sukupuoli=" + sukupuoli +
+                ", liittynyt=" + liittynyt +
+                ", osoite='" + osoite + '\'' +
+                '}';
+    }
 }

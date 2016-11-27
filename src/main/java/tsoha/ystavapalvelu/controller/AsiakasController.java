@@ -116,8 +116,11 @@ public class AsiakasController {
             } else if(sessioAsiakas.getId() != urlID) {
                 res.redirect("/?norights=1", 302);
             }
+            System.out.println(sessioAsiakas.getId());
             sessioAsiakas.setOsoite(req.queryParams("osoite"));
-            sessioAsiakas.setSalasana(req.queryParams("salasana"));
+            if(req.queryParams("salasana") != null  && !req.queryParams("salasana").isEmpty()) {
+                sessioAsiakas.setSalasana(req.queryParams("salasana"));
+            }
             sessioAsiakas.setSukupuoli(Integer.parseInt(req.queryParams("sukupuoli")));
 
             SimpleDateFormat format = new SimpleDateFormat("dd.MM.YYYY");

@@ -58,6 +58,7 @@
                 </div>
                 <p th:hidden="${kirjautunut}">
                     <span th:hidden="${kirjautunut}" th:text="${'Terve ' + kayttaja}" > Et ole kirjautunut</span>
+                    <span th:hidden="${kirjautunut}" th:text="${kayttajatiedot}" > Et ole kirjautunut</span>
                 </p>
                 <h3 th:hidden="${!kirjautunut}"> Syitä rekisteröityä </h3>
                 <ul th:hidden="${!kirjautunut}">
