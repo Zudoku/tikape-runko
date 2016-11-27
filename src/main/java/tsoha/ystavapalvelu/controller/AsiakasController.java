@@ -100,6 +100,7 @@ public class AsiakasController {
             map.put("updated", updated);
 
             map.put("kayttaja", sessioAsiakas.getKayttajanimi());
+            map.put("kayttajatiedot", sessioAsiakas);
             map.put("kayttajaid", sessioAsiakas.getId());
 
             return new ModelAndView(map, "omattiedot");
