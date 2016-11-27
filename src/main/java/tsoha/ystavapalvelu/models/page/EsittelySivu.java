@@ -1,6 +1,11 @@
 package tsoha.ystavapalvelu.models.page;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class EsittelySivu {
 
@@ -77,5 +82,23 @@ public class EsittelySivu {
 
     public void setJulkinen(boolean julkinen) {
         this.julkinen = julkinen;
+    }
+
+    public String prettyPrint(Timestamp stamp) {
+        return LocalDateTime.ofEpochSecond(stamp.getTime(), stamp.getNanos(), ZoneOffset.ofHours(1))
+                .format(DateTimeFormatter.ofPattern("dd.MM.uuuu HH:mm:ss"));
+    }
+
+    @Override
+    public String toString() {
+        return "EsittelySivu{" +
+                "sivu_id=" + sivu_id +
+                ", omistaja_id=" + omistaja_id +
+                ", otsikko='" + otsikko + '\'' +
+                ", leipateksti='" + leipateksti + '\'' +
+                ", luotu=" + luotu +
+                ", muokattu=" + muokattu +
+                ", julkinen=" + julkinen +
+                '}';
     }
 }

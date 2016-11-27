@@ -1,5 +1,6 @@
 package tsoha.ystavapalvelu.models.user;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Asiakas {
@@ -77,6 +78,11 @@ public class Asiakas {
 
     public void setOsoite(String osoite) {
         this.osoite = osoite;
+    }
+
+    public String prettyPrint(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.YYYY");
+        return format.format(date);
     }
 
     @Override

@@ -57,15 +57,15 @@
                 </div>
                 <div class="form-group">
                     <label for="syntymaaika">Syntymäaika</label>
-                    <input id="syntymaaika" name="syntymaaika" type="text" class="form-control" placeholder="" th:value="${kayttajatiedot.syntymaaika}" />
+                    <input id="syntymaaika" name="syntymaaika" type="text" class="form-control" placeholder="" th:value="${kayttajatiedot.prettyPrint(syntymaaika)}" />
                 </div>
                 <div class="form-group">
                     <label for="liittynyt">Liittynyt</label>
-                    <input id="liittynyt" name="liittynyt" type="text" class="form-control disabled"  placeholder="" th:value="${kayttajatiedot.liittynyt}" />
+                    <input id="liittynyt" name="liittynyt" type="text" class="form-control disabled"  placeholder="" th:value="${kayttajatiedot.prettyPrint(liittynyt)}" />
                 </div>
                 <div class="form-group">
                     <label for="sukupuoli">Sukupuoli</label>
-                    <select id="sukupuoli" name="sukupuoli" class="form-control" th:value="${kayttajatiedot.sukupuoli}">
+                    <select id="sukupuoli" name="sukupuoli" class="form-control" th:selected="${kayttajatiedot.sukupuoli}">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
