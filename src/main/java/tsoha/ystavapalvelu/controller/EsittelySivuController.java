@@ -249,7 +249,7 @@ public class EsittelySivuController {
             errors.add("Otsikko ei voi olla yli 100 pituinen!");
             return;
         }
-        userdata.setLeipateksti(input);
+        userdata.setOtsikko(input);
     }
 
     private void validoiJulkinen(String input, List<String> errors, EsittelySivu userdata){
