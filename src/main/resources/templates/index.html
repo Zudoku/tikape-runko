@@ -67,8 +67,8 @@
                     <li>Ensimmäinen kuukausi ilmaiseksi</li>
                     <li>Tutustumishalusia ihmisiä</li>
                 </ul>
-                <a th:hidden="${!kirjautunut}" class="btn btn-default" href="/register">Rekisteröidy</a>
-                <a th:hidden="${!kirjautunut}" class="btn btn-default" href="/login">Kirjaudu sisään</a>
+                <a th:classappend="${!kirjautunut} ? hidden : t" class="btn btn-default" href="/register">Rekisteröidy</a>
+                <a th:classappend="${!kirjautunut} ? hidden : t" class="btn btn-default" href="/login">Kirjaudu sisään</a>
                 
             </div>
         </div>
