@@ -159,7 +159,7 @@ public class EsittelySivuController {
 
             validoiOtsikko(otsikko, errors, input);
             validoiLeipateksti(leipateksti, errors, input);
-            validoiJulkinen(leipateksti, errors, input);
+            validoiJulkinen(julkinen, errors, input);
 
             if(!errors.isEmpty()) {
                 req.session().attribute("errors", errors);
