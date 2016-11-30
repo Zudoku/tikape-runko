@@ -49,15 +49,15 @@
             <form th:action="@{~/newpage}" th:object="${pageInfo}" method="post">
                 <div class="form-group">
                     <label for="otsikko">Otsikko</label>
-                    <input id="otsikko" name="otsikko" type="text" class="form-control"  placeholder="Esittelysivun otsikko" />
+                    <input id="otsikko" name="otsikko" type="text" class="form-control" th:value="${validatedinput.otsikko}" placeholder="Esittelysivun otsikko" />
                 </div>
                 <div class="form-group">
                     <label for="leipateksti">Leipäteksti</label>
-                    <textarea id="leipateksti" name="leipateksti"  class="form-control" rows="10"></textarea>
+                    <textarea id="leipateksti" name="leipateksti"  class="form-control" rows="10">[[${validatedinput.leipateksti}]]</textarea>
                 </div>
                 <div class="form-group">
                     <label for="julkinen">Sivu on julkinen</label>
-                    <input type="checkbox" id="julkinen" value="julkinen" aria-label="" />
+                    <input type="checkbox" id="julkinen" name="julkinen" aria-label="" th:checked="${validatedinput.julkinen}"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Lisää</button>
             </form>
