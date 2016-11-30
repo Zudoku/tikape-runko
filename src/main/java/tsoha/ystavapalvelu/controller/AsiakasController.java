@@ -79,7 +79,7 @@ public class AsiakasController {
                 res.redirect("/register?badcreds=1", 302);
                 return "OK";
             }
-
+            input.setLiittynyt(new Date());
             try {
                 asiakasDao.add(input);
             } catch (SQLException exception) {
