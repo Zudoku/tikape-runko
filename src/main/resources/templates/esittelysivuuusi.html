@@ -43,6 +43,9 @@
         </nav>
 
         <div class="container">
+            <div  th:each="virhe : ${errors}" class="row alert alert-danger" role="alert" >
+                <span th:text="${virhe}"></span>
+            </div>
             <form th:action="@{~/newpage}" th:object="${pageInfo}" method="post">
                 <div class="form-group">
                     <label for="otsikko">Otsikko</label>

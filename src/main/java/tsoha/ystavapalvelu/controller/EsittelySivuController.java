@@ -8,7 +8,9 @@ import tsoha.ystavapalvelu.models.page.EsittelySivuDao;
 import tsoha.ystavapalvelu.models.user.Asiakas;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static spark.Spark.*;
 
@@ -78,6 +80,14 @@ public class EsittelySivuController {
 
             map.put("esittelysivu", sivu);
 
+            if(req.session().attribute("errors") != null) {
+                map.put("errors", req.session().attribute("errors"));
+            } else {
+                map.put("errors", new ArrayList<String>());
+            }
+
+            req.session().removeAttribute("errors");
+
             return new ModelAndView(map, "esittelysivumuokkaus");
         }, new ThymeleafTemplateEngine());
 
@@ -114,23 +124,51 @@ public class EsittelySivuController {
             map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
             map.put("kayttajaid",  sessioAsiakas.getId());
 
+            if(req.session().attribute("errors") != null) {
+                map.put("errors", req.session().attribute("errors"));
+            } else {
+                map.put("errors", new ArrayList<String>());
+            }
+
+            if(req.session().attribute("validatedinput") != null) {
+                map.put("validatedinput", req.session().attribute("validatedinput"));
+            } else {
+                map.put("validatedinput", new EsittelySivu(-1, -1, "", "", null, null, false));
+            }
+
+            req.session().removeAttribute("validatedinput");
+            req.session().removeAttribute("errors");
+
             return new ModelAndView(map, "esittelysivuuusi");
         }, new ThymeleafTemplateEngine());
 
         post("/newpage", (req, res) -> {
-            HashMap map = new HashMap<>();
+            List<String> errors = new ArrayList<String>();
+
 
             Asiakas sessioAsiakas = req.session().attribute("asiakas");
             if(sessioAsiakas == null) {
                 res.redirect("/?norights=1", 302);
             }
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            EsittelySivu input = new EsittelySivu(-1, sessioAsiakas.getId(), "","", now, now, false);
+
             String otsikko = req.queryParams("otsikko");
             String leipateksti = req.queryParams("leipateksti");
-            boolean julkinen = Boolean.parseBoolean(req.queryParams("julkinen"));
-            Timestamp now = new Timestamp(System.currentTimeMillis());
-            EsittelySivu sivu = new EsittelySivu(-1, sessioAsiakas.getId(), otsikko, leipateksti, now, now, julkinen );
+            String julkinen = req.queryParams("julkinen");
 
-            esittelySivuDao.add(sivu);
+            validoiOtsikko(otsikko, errors, input);
+            validoiLeipateksti(leipateksti, errors, input);
+            validoiJulkinen(leipateksti, errors, input);
+
+            if(!errors.isEmpty()) {
+                req.session().attribute("errors", errors);
+                req.session().attribute("validatedinput", input);
+                res.redirect("/newpage", 302);
+                return "OK";
+            }
+
+            esittelySivuDao.add(input);
 
             res.redirect("/mypages?added=1", 302);
 
@@ -139,23 +177,32 @@ public class EsittelySivuController {
         });
 
         post("/page/:postId/edit", (req, res) -> {
-            HashMap map = new HashMap<>();
+            List<String> errors = new ArrayList<String>();
             Integer postId = Integer.parseInt(req.params("postId"));
             EsittelySivu sivu = esittelySivuDao.findOne(postId);
             Asiakas sessioAsiakas = req.session().attribute("asiakas");
-            if(sessioAsiakas == null || sivu.getOmistaja_id() != sessioAsiakas.getId()) {
+            if(sessioAsiakas == null || sivu == null || sivu.getOmistaja_id() != sessioAsiakas.getId()) {
                 res.redirect("/?norights=1", 302);
             }
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            EsittelySivu input = new EsittelySivu(sivu.getSivu_id(), sivu.getOmistaja_id(), sivu.getOtsikko(), sivu.getLeipateksti(),
+                    sivu.getLuotu(), now, sivu.isJulkinen());
+
             String otsikko = req.queryParams("otsikko");
             String leipateksti = req.queryParams("leipateksti");
-            boolean julkinen = Boolean.parseBoolean(req.queryParams("julkinen"));
-            Timestamp now = new Timestamp(System.currentTimeMillis());
-            sivu.setOtsikko(otsikko);
-            sivu.setLeipateksti(leipateksti);
-            sivu.setJulkinen(julkinen);
-            sivu.setMuokattu(now);
+            String julkinen = req.queryParams("julkinen");
 
-            esittelySivuDao.update(sivu);
+            validoiJulkinen(julkinen, errors, input);
+            validoiOtsikko(otsikko, errors, input);
+            validoiLeipateksti(leipateksti, errors, input);
+
+            if(!errors.isEmpty()) {
+                req.session().attribute("errors", errors);
+                res.redirect("/page/" + postId + "/edit", 302);
+                return "OK";
+            }
+
+            esittelySivuDao.update(input);
 
             res.redirect("/mypages?edited=1", 302);
 
@@ -179,5 +226,45 @@ public class EsittelySivuController {
             return "OK";
         });
 
+    }
+
+    private void validoiLeipateksti(String input, List<String> errors, EsittelySivu userdata){
+        if(input == null || input.isEmpty()){
+            errors.add("Leipäteksti ei voi olla tyhjä!");
+            return;
+        }
+        if(input.length() > 1000) {
+            errors.add("Leipäteksti ei voi olla yli 1000 pituinen!");
+            return;
+        }
+        userdata.setLeipateksti(input);
+    }
+
+    private void validoiOtsikko(String input, List<String> errors, EsittelySivu userdata){
+        if(input == null || input.isEmpty()){
+            errors.add("Otsikko ei voi olla tyhjä!");
+            return;
+        }
+        if(input.length() > 100) {
+            errors.add("Otsikko ei voi olla yli 100 pituinen!");
+            return;
+        }
+        userdata.setLeipateksti(input);
+    }
+
+    private void validoiJulkinen(String input, List<String> errors, EsittelySivu userdata){
+        if(input == null || input.isEmpty()){
+            errors.add("Julkisuus ei voi olla tyhjä!");
+            return;
+        }
+        if(input.equals("true")) {
+            userdata.setJulkinen(true);
+            return;
+        }
+        if(input.equals("false")) {
+            userdata.setJulkinen(false);
+            return;
+        }
+        errors.add("Julkisuus on väärässä muodossa!");
     }
 }
