@@ -46,6 +46,9 @@
             <div th:hidden="${!updated}" class="alert alert-success">
                 Tiedot Päivitetty!
             </div>
+            <div  th:each="virhe : ${errors}" class="row">
+                <span th:text="${virhe}"></span>
+            </div>
             <form class="lomake" th:action="@{~/profile/{profileId}/update(profileId=${kayttajaid})}" th:object="${pageInfo}" method="post">
                 <div class="form-group">
                     <label for="nimimerkki">Nimimerkki</label>
