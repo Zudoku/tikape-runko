@@ -37,9 +37,9 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li th:hidden="${!kirjautunut}"><a th:hidden="${!kirjautunut}" href="/login">Kirjaudu sisään</a></li>
-                        <li th:hidden="${!kirjautunut}"><a th:hidden="${!kirjautunut}" href="/register">Rekisteröidy</a></li>
-                        <li th:hidden="${kirjautunut}"><a th:hidden="${kirjautunut}" href="/logout">Kirjaudu ulos</a></li>
+                        <li th:hidden="${!kirjautunut}"><a th:classappend="${!kirjautunut} ? hidden : t" href="/login">Kirjaudu sisään</a></li>
+                        <li th:hidden="${!kirjautunut}"><a th:classappend="${!kirjautunut} ? hidden : t" href="/register">Rekisteröidy</a></li>
+                        <li th:hidden="${kirjautunut}"><a th:classappend="${kirjautunut} ? hidden : t" href="/logout">Kirjaudu ulos</a></li>
                     </ul>
                 </div>
             </div>
