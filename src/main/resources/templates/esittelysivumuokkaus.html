@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group">
                     <label for="julkinen">Sivu on julkinen</label>
-                    <input type="checkbox" id="julkinen" value="julkinen" aria-label=""  th:checked="${esittelysivu.julkinen}"/>
+                    <input type="checkbox" id="julkinen" name="julkinen" aria-label=""  th:checked="${esittelysivu.julkinen}"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Päivitä</button>
                 <a th:href="${'/page/' + esittelysivu.sivu_id + '/delete'}" class="btn btn-danger" > Poista </a>
