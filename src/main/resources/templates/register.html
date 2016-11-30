@@ -19,7 +19,7 @@
     </div>
     <form class="lomake" th:action="@{~/register}" th:object="${registerInfo}" method="post">
         <div class="form-group">
-            <label for="kayttajanimi">Nimimerkki</label>
+            <label for="kayttajanimi">Käyttäjänimesi</label>
             <input id="kayttajanimi" name="kayttajanimi" type="text" class="form-control disabled" placeholder="Nimimerkkisi" th:value="${validatedinput.kayttajanimi}"/>
         </div>
         <div class="form-group">
@@ -28,14 +28,14 @@
         </div>
         <div class="form-group">
             <label for="syntymaaika">Syntymäaika</label>
-            <input id="syntymaaika" name="syntymaaika" type="text" class="form-control" placeholder="pp.mm.vvvv" th:value="${validatedinput.syntymaaika}"/>
+            <input id="syntymaaika" name="syntymaaika" type="text" class="form-control" placeholder="pp.kk.vvvv" th:value="${validatedinput.syntymaaika}"/>
         </div>
         <div class="form-group">
             <label for="sukupuoli">Sukupuoli</label>
-            <select id="sukupuoli" name="sukupuoli" class="form-control" value="1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+            <select id="sukupuoli" name="sukupuoli" class="form-control" th:value="${validatedinput.sukupuoliString()}">
+                <option>Mies</option>
+                <option>Nainen</option>
+                <option>Muu</option>
             </select>
         </div>
         <div class="form-group">

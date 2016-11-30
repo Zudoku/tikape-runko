@@ -85,6 +85,16 @@ public class Asiakas {
         return format.format(date);
     }
 
+    public String sukupuoliString() {
+        if(sukupuoli == 1) {
+            return "Mies";
+        }
+        if(sukupuoli == 2) {
+            return "Nainen";
+        }
+        return "Muu";
+    }
+
     @Override
     public String toString() {
         return "Asiakas{" +

@@ -256,14 +256,12 @@ public class AsiakasController {
         try {
             SimpleDateFormat format = new SimpleDateFormat("dd.MM.YYYY");
             date = format.parse(input);
-            if(!input.equals(format.format(date))) {
-                date = null;
-            }
+
         } catch(ParseException e) {
 
         }
         if(date == null) {
-            errors.add("Antamasi syntymäpäivä ei ole oikeassa muodossa (dd.MM.YYYY)");
+            errors.add("Antamasi syntymäpäivä ei ole oikeassa muodossa (pp.kk.vvvv)");
             return;
         } else {
             userdata.setSyntymaaika(date);
@@ -275,11 +273,19 @@ public class AsiakasController {
             errors.add("Sukupuoli ei voi olla tyhjä!");
             return;
         }
-        if(input.equals("1") || input.equals("2") || input.equals("3")) {
-            errors.add("Antamasi sukupuoli on virheellinen!");
+        if(input.equals("Mies")){
+            userdata.setSukupuoli(1);
             return;
         }
-        userdata.setSukupuoli(Integer.parseInt(input));
+        if(input.equals("Nainen") ) {
+            userdata.setSukupuoli(2);
+            return;
+        } input.equals("Muu")) {
+            userdata.setSukupuoli(3);
+            return;
+        }
+        errors.add("Antamasi sukupuoli on virheellinen!");
+
     }
 
 
