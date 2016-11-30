@@ -280,7 +280,8 @@ public class AsiakasController {
         if(input.equals("Nainen") ) {
             userdata.setSukupuoli(2);
             return;
-        } input.equals("Muu")) {
+        }
+        if(input.equals("Muu")) {
             userdata.setSukupuoli(3);
             return;
         }
