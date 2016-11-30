@@ -254,17 +254,13 @@ public class EsittelySivuController {
 
     private void validoiJulkinen(String input, List<String> errors, EsittelySivu userdata){
         if(input == null || input.isEmpty()){
-            errors.add("Julkisuus ei voi olla tyhjä!");
-            return;
-        }
-        if(input.equals("true")) {
-            userdata.setJulkinen(true);
-            return;
-        }
-        if(input.equals("false")) {
             userdata.setJulkinen(false);
             return;
         }
-        errors.add("Julkisuus on väärässä muodossa! " + input);
+        if(input.equals("on")) {
+            userdata.setJulkinen(true);
+            return;
+        }
+        errors.add("Julkisuus on väärässä muodossa!");
     }
 }
