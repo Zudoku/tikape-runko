@@ -28,11 +28,11 @@
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
-                        <li th:hidden="${kirjautunut}"><a th:hidden="${kirjautunut}" th:href="${'/profile/' + kayttajaid}">Omat tiedot</a></li>
-                        <li th:hidden="${kirjautunut}"><a th:hidden="${kirjautunut}" href="/mypages">Omat sivut</a></li>
-                        <li th:hidden="${kirjautunut}"><a th:hidden="${kirjautunut}" href="/sharedpages">Minulle jaetut sivut</a></li>
-                        <li th:hidden="${kirjautunut}"><a th:hidden="${kirjautunut}" href="/pagelist">Selaa sivuja</a></li>
-                        <li th:hidden="${kirjautunut}"><a th:hidden="${kirjautunut}" href="/mymessages">Viestit</a></li>
+                        <li th:hidden="${kirjautunut}"><a th:classappend="${kirjautunut} ? hidden : t" th:href="${'/profile/' + kayttajaid}">Omat tiedot</a></li>
+                        <li th:hidden="${kirjautunut}"><a th:classappend="${kirjautunut} ? hidden : t" href="/mypages">Omat sivut</a></li>
+                        <li th:hidden="${kirjautunut}"><a th:classappend="${kirjautunut} ? hidden : t" href="/sharedpages">Minulle jaetut sivut</a></li>
+                        <li th:hidden="${kirjautunut}"><a th:classappend="${kirjautunut} ? hidden : t" href="/pagelist">Selaa sivuja</a></li>
+                        <li th:hidden="${kirjautunut}"><a th:classappend="${kirjautunut} ? hidden : t" href="/mymessages">Viestit</a></li>
 
                     </ul>
 
