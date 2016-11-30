@@ -14,7 +14,7 @@
 <body>
 <div class="container">
     <h1>Rekisteröityminen</h1>
-    <div  th:each="virhe : ${errors}" class="row">
+    <div  th:each="virhe : ${errors}" class="row alert alert-danger" role="alert" >
         <span th:text="${virhe}"></span>
     </div>
     <form class="lomake" th:action="@{~/register}" th:object="${registerInfo}" method="post">

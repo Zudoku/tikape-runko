@@ -36,8 +36,17 @@ public class AsiakasController {
             HashMap map = new HashMap<>();
             boolean badCreds = "1".equals(req.queryParams("badcreds"));
             map.put("badcreds", badCreds);
-            map.put("errors", req.session().attribute("errors"));
-            map.put("validatedinput", req.session().attribute("validatedinput"));
+            if(req.session().attribute("errors") != null) {
+                map.put("errors", req.session().attribute("errors"));
+            } else {
+                map.put("errors", new ArrayList<String>());
+            }
+
+            if(req.session().attribute("validatedinput") != null) {
+                map.put("validatedinput", req.session().attribute("validatedinput"));
+            } else {
+                map.put("validatedinput", new Asiakas(-1, "", "", null, 1, null, ""));
+            }
 
             req.session().removeAttribute("errors");
             req.session().removeAttribute("validatedinput");
@@ -125,7 +134,12 @@ public class AsiakasController {
             map.put("kayttaja", sessioAsiakas.getKayttajanimi());
             map.put("kayttajatiedot", sessioAsiakas);
             map.put("kayttajaid", sessioAsiakas.getId());
-            map.put("errors", req.session().attribute("errors"));
+
+            if(req.session().attribute("errors") != null) {
+                map.put("errors", req.session().attribute("errors"));
+            } else {
+                map.put("errors", new ArrayList<String>());
+            }
 
             req.session().removeAttribute("errors");
 
@@ -141,7 +155,6 @@ public class AsiakasController {
                     sessioAsiakas.getSyntymaaika(), sessioAsiakas.getSukupuoli(), sessioAsiakas.getLiittynyt(), sessioAsiakas.getOsoite());
             if(sessioAsiakas == null) {
                 res.redirect("/login", 302);
-
             } else if(sessioAsiakas.getId() != urlID) {
                 res.redirect("/?norights=1", 302);
             }
@@ -156,7 +169,7 @@ public class AsiakasController {
 
             if(!errors.isEmpty()) {
                 req.session().attribute("errors", errors);
-                res.redirect("/profile/" + urlID + "/", 302);
+                res.redirect("/profile/" + urlID, 302);
                 return "OK";
             }
             Asiakas uusiAsiakas = asiakasDao.update(input);
