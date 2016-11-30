@@ -261,6 +261,6 @@ public class EsittelySivuController {
             userdata.setJulkinen(true);
             return;
         }
-        errors.add("Julkisuus on väärässä muodossa!");
+        errors.add("Julkisuus on väärässä muodossa! " + input);
     }
 }
