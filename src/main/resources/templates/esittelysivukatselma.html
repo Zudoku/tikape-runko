@@ -55,7 +55,7 @@
                         </ul>
                         <p th:text="${esittelysivu.leipateksti}">leipateksti</p>
                         <a th:classappend="${mypage} ? hidden : t" class="btn btn-default" th:href="${'/sendmessage/' + esittelysivu.sivu_id}">Laita viesti</a>
-                        <a th:hidden="${!mypage}" class="btn btn-warning" th:href="${'/page/' + esittelysivu.sivu_id + '/edit'}">Muokkaa</a>
+                        <a th:classappend="${!mypage} ? hidden : t" class="btn btn-warning" th:href="${'/page/' + esittelysivu.sivu_id + '/edit'}">Muokkaa</a>
                     </div>
                 </div>
             </div>
