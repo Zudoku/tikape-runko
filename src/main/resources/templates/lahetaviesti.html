@@ -43,7 +43,7 @@
         </nav>
         <div class="container">
             <span th:text="${tekeminen + targetAsiakas.kayttajanimi}"></span>
-            <form class="lomake" th:action="@{~/message/{targetId}/sendf(targetId=targetAsiakas.id)}" th:object="${messageInfo}" method="post">
+            <form class="lomake" th:action="@{~/message/{targetId}/sendf(targetId=${targetAsiakas.id})}" th:object="${messageInfo}" method="post">
                 <div class="form-group">
                     <label for="sisalto">Viestin sisältö</label>
                     <textarea id="sisalto" name="sisalto"  class="form-control" rows="5"></textarea>

@@ -58,7 +58,7 @@ public class ViestiController {
             if(req.session().attribute("validatedinput") != null) {
                 map.put("validatedinput", req.session().attribute("validatedinput"));
             } else {
-                map.put("validatedinput", new Viesti(-1, -1, sessioAsiakas.getId(), now, ""));
+                map.put("validatedinput", new Viesti(-1, sessioAsiakas.getId(), -1, now, ""));
             }
 
             req.session().removeAttribute("validatedinput");
@@ -113,8 +113,8 @@ public class ViestiController {
             map.put("added", "1".equals(req.queryParams("added")));
 
 
-            map.put("saadutviesit", viestiDao.findAllVastaanotettu(sessioAsiakas.getId()));
-            map.put("lahetetytviestit", viestiDao.findAll());
+            map.put("saadutviestit", viestiDao.findAllVastaanotettu(sessioAsiakas.getId()));
+            map.put("lahetetytviestit", viestiDao.findAllLahetetty(sessioAsiakas.getId()));
 
 
             return new ModelAndView(map, "omatviestit");
