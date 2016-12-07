@@ -47,6 +47,21 @@ public class ViestiController {
             map.put("tekeminen",  "Lähetä viesti henkilölle: ");
             map.put("sending", true);
 
+            if(req.session().attribute("errors") != null) {
+                map.put("errors", req.session().attribute("errors"));
+            } else {
+                map.put("errors", new ArrayList<String>());
+            }
+
+            if(req.session().attribute("validatedinput") != null) {
+                map.put("validatedinput", req.session().attribute("validatedinput"));
+            } else {
+                map.put("validatedinput", new EsittelySivu(-1, -1, "", "", null, null, false));
+            }
+
+            req.session().removeAttribute("validatedinput");
+            req.session().removeAttribute("errors");
+
             return new ModelAndView(map, "lahetaviesti");
         }, new ThymeleafTemplateEngine());
 
@@ -98,6 +113,7 @@ public class ViestiController {
 
             map.put("saadutviesit", viestiDao.findAllVastaanotettu(sessioAsiakas.getId()));
             map.put("lahetetytviestit", viestiDao.findAllLahetetty(sessioAsiakas.getId()));
+
 
             return new ModelAndView(map, "omatviestit");
         }, new ThymeleafTemplateEngine());
