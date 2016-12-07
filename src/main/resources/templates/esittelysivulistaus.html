@@ -42,6 +42,13 @@
         </nav>
 
         <div class="container">
+            <div id="pretext">
+                <div clasS="well">
+                    <strong>Tällä sivulla näet kaikki julkiset sivut jotka voivat kiinnostavat sinua.
+                        Voit hakea esittelysivuja. Hakutulokset suodattuvat myös omissa tiedoissa määrittelemiesi hakukohteiden mukaan.
+                    HUOM! Haku ja suodatus ei ole vielä tehty!</strong>
+                </div>
+            </div>
             <div id="results">
                 <div th:each="esittelysivu : ${esittelysivut}" class="row">
                     <div class="well">
@@ -50,8 +57,8 @@
                             <span th:text="${esittelysivu.otsikko}"></span>
                         </strong>
                         <ul>
-                            <li>Luojan ID <span th:text="${esittelysivu.omistaja_id}"></span></li>
-                            <li>Luotu <span th:text="${esittelysivu.luotu}"></span></li>
+                            <li>Luoja: <span th:text="${esittelysivu.omistajaString}"></span></li>
+                            <li>Luotu <span th:text="${esittelysivu.prettyPrint(esittelysivu.luotu)}"></span></li>
                         </ul>
                         <p th:text="${esittelysivu.leipateksti}"></p>
                         <a class="btn btn-default" th:href="${'/page/' + esittelysivu.sivu_id}">Lue lisää</a>

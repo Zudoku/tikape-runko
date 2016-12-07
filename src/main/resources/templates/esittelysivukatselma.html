@@ -48,7 +48,7 @@
                     <div class="well">
                         <strong><span th:text="${esittelysivu.otsikko}">__</span></strong>
                         <ul>
-                            <li th:text="${esittelysivu.omistaja_id}">Nimi</li>
+                            <li th:text="${esittelysivu.omistajaString}">Nimi</li>
                             <li th:text="${'Julkisuus: ' + ((esittelysivu.julkinen) ? 'Julkinen' : 'Yksityinen')}">Julkisuus: ???</li>
                             <li th:text="${'Luotu: ' + esittelysivu.prettyPrint(esittelysivu.luotu)}">Luotu ___</li>
                             <li th:text="${'Muokattu: ' + esittelysivu.prettyPrint(esittelysivu.muokattu)}">Muokattu 15.11.2016 17:15</li>

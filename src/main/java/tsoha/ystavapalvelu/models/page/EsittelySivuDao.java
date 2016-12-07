@@ -43,6 +43,7 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
 
         if(result.next()) {
             EsittelySivu loydos = collect(result);
+            loydos.setOmistajaString(findOmistaja(loydos.getOmistaja_id()));
             statement.close();
             result.close();
             connection.close();
@@ -50,6 +51,24 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         }
         connection.close();
         return null;
+    }
+
+    public String findOmistaja(int omistaja_id) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("SELECT kayttajanimi FROM Asiakas WHERE id=?");
+
+        statement.setInt(1, omistaja_id);
+
+        ResultSet result = statement.executeQuery();
+        String name = "";
+        if(result.next()) {
+            name = result.getString("kayttajanimi");
+        }
+        result.close();
+        statement.close();
+        connection.close();
+
+        return name;
     }
 
     @Override
@@ -62,7 +81,9 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         ResultSet result = statement.executeQuery();
 
         while(result.next()){
-            esittelySivu.add(collect(result));
+            EsittelySivu loydos = collect(result);
+            loydos.setOmistajaString(findOmistaja(loydos.getOmistaja_id()));
+            esittelySivu.add(loydos);
         }
         statement.close();
         result.close();

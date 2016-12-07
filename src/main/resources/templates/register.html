@@ -32,10 +32,10 @@
         </div>
         <div class="form-group">
             <label for="sukupuoli">Sukupuoli</label>
-            <select id="sukupuoli" name="sukupuoli" class="form-control" th:value="${validatedinput.sukupuoliString()}">
-                <option>Mies</option>
-                <option>Nainen</option>
-                <option>Muu</option>
+            <select id="sukupuoli" name="sukupuoli" class="form-control">
+                <option th:selected="${validatedinput.sukupuoliString().equals('Mies')}" value="Mies">Mies</option>
+                <option th:selected="${validatedinput.sukupuoliString().equals('Nainen')}" value="Nainen">Nainen</option>
+                <option th:selected="${validatedinput.sukupuoliString().equals('Muu')}" value="Muu">Muu</option>
             </select>
         </div>
         <div class="form-group">

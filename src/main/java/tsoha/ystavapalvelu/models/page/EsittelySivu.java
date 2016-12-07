@@ -17,6 +17,15 @@ public class EsittelySivu {
     private Timestamp muokattu;
     private boolean julkinen;
 
+    private String omistajaString;
+
+    public String getOmistajaString() {
+        return omistajaString;
+    }
+
+    public void setOmistajaString(String omistajaString) {
+        this.omistajaString = omistajaString;
+    }
 
     public EsittelySivu(int sivu_id, int omistaja_id, String otsikko, String leipateksti, Timestamp luotu, Timestamp muokattu, boolean julkinen) {
         this.sivu_id = sivu_id;

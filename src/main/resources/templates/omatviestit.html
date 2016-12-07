@@ -43,6 +43,12 @@
 </nav>
 
 <div class="container">
+    <div th:hidden="${!added}" class="alert alert-success">
+        Uusi Viesti laitettu!
+    </div>
+    <div th:hidden="${!deleted}" class="alert alert-warning">
+        Viesti poistettu!
+    </div>
     <div id="received">
         <h3>Saamasi viestit</h3>
         <table class="table table-striped">
