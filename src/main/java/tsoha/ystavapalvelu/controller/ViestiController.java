@@ -139,10 +139,11 @@ public class ViestiController {
 
     private void validoiAnonyymiys(String input, List<String> errors, Viesti userdata, int lahettajaID) {
         if(input == null || input.isEmpty()){
+            userdata.setLahettaja(lahettajaID);
             return;
         }
         if(input.equals("on")) {
-            userdata.setLahettaja(lahettajaID);
+
             return;
         }
         errors.add("Anonyymiys on väärässä muodossa! " + input);
