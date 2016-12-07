@@ -42,6 +42,9 @@
             </div>
         </nav>
         <div class="container">
+            <div  th:each="virhe : ${errors}" class="row alert alert-danger" role="alert" >
+                <span th:text="${virhe}"></span>
+            </div>
             <span th:text="${tekeminen + targetAsiakas.kayttajanimi}"></span>
             <form class="lomake" th:action="@{~/message/{targetId}/sendf(targetId=${targetAsiakas.id})}" th:object="${messageInfo}" method="post">
                 <div class="form-group">

@@ -64,8 +64,7 @@ public class Viesti {
     }
 
     public String prettyPrint(Timestamp stamp) {
-        return LocalDateTime.ofEpochSecond(stamp.getTime(), stamp.getNanos(), ZoneOffset.ofHours(1))
-                .format(DateTimeFormatter.ofPattern("dd.MM.YYYY HH:mm:ss"));
+        return stamp.toString();
     }
 
     public String getLahettajaString() {
