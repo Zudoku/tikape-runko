@@ -68,7 +68,7 @@
                 </div>
                 <div class="form-group">
                     <label for="sukupuoli">Sukupuoli</label>
-                    <select id="sukupuoli" name="sukupuoli" class="form-control" th:selected="{kayttajatiedot.sukupuoliString()}">
+                    <select id="sukupuoli" name="sukupuoli" class="form-control" th:selected="${kayttajatiedot.sukupuoliString()}">
                         <option value="Mies">Mies</option>
                         <option value="Nainen">Nainen</option>
                         <option value="Muu">Muu</option>
