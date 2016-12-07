@@ -54,6 +54,7 @@
                 <div class="form-group">
                     <label for="anonyymiys">Viesti on anonyymi</label>
                     <input type="checkbox" id="anonyymiys" name="anonyymiys" aria-label="" th:checked="${(validatedinput.lahettaja == -1)}"/>
+                    <p> Jos viesti on anonyymi, et voi poistaa tai muokata sitä jälkikäteen, etkä näe sitä lähetetyissä viesteissäsi.</p>
                 </div>
                 <button type="submit" class="btn btn-success">Lähetä viesti</button>
             </form>

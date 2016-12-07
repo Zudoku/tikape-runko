@@ -17,6 +17,8 @@ Projektia testatessa kirjaudu tunnuksilla
 |---|---|
 | Toto99112  | test  |
 
+tai voit myös vaihtoehtoisesti tehdä omat tunnukset.
+
 * [Homepage](https://protected-reef-49430.herokuapp.com/)
 * [Register](https://protected-reef-49430.herokuapp.com/register)
 * [Login](https://protected-reef-49430.herokuapp.com/login)
@@ -25,11 +27,13 @@ Projektia testatessa kirjaudu tunnuksilla
 * [Omat sivut](https://protected-reef-49430.herokuapp.com/mypages)
 
 * [Minulle jaetut sivut](https://protected-reef-49430.herokuapp.com/sharedpages) (Ei vielä kunnolla implementoitu)
-* [Selaa sivuja](https://protected-reef-49430.herokuapp.com/pagelist)
+* [Selaa sivuja](https://protected-reef-49430.herokuapp.com/pagelist) (Ei vielä ihan kokonaan implementoitu
 * [Katso sivua](https://protected-reef-49430.herokuapp.com/page/1)
 * [Muokkaa sivua](https://protected-reef-49430.herokuapp.com/page/1/edit)
 * [Uusi sivu](https://protected-reef-49430.herokuapp.com/newpage)
 
-* [Lähetä viesti](https://protected-reef-49430.herokuapp.com/sendmessage/1) (Ei vielä kunnolla implementoitu)
-* [Viestit](https://protected-reef-49430.herokuapp.com/mymessages) (Ei vielä kunnolla implementoitu)
+* [Lähetä viesti](https://protected-reef-49430.herokuapp.com/message/2/send)
+* [Viestit](https://protected-reef-49430.herokuapp.com/mymessages)
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
