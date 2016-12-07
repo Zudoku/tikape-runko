@@ -79,7 +79,7 @@ public class ViestiController {
             Viesti input = new Viesti(-1, -1, targetAsiakasId, now, "");
 
             String sisalto = req.queryParams("sisalto");
-            String anonyymi = req.queryParams("anonyymi");
+            String anonyymi = req.queryParams("anonyymiys");
 
             validoiSisalto(sisalto, errors, input);
             validoiAnonyymiys(anonyymi, errors, input, sessioAsiakas.getId());
