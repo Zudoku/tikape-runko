@@ -1,82 +1,112 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>Ystävänvälityspalvelu</title>
-        <link rel="stylesheet" href="/static/css/bootstrap.css" />
-        <link rel="stylesheet" href="/static/css/ystavapalvelu.css" />
-    </head>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Ystävänvälityspalvelu</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/css/ystavapalvelu.css"/>
+</head>
 
 
-    <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!-- Sovelluksen nimi -->
-                    <a class="navbar-brand" href="/">Ystävänvälityspalvelu</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="navigation">
-                    <ul class="nav navbar-nav">
-                        <!-- Navigaation linkit -->
-                        <li><a th:href="${'/profile/' + kayttajaid}">Omat tiedot</a></li>
-                        <li><a href="/mypages">Omat sivut</a></li>
-                        <li><a href="/sharedpages">Minulle jaetut sivut</a></li>
-                        <li><a href="/pagelist">Selaa sivuja</a></li>
-                        <li class="active" ><a href="/mymessages">Viestit</a></li>
-
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/logout">Kirjaudu ulos</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="container">
-            <div id="results">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Lähettäjä</th>
-                            <th>Aika</th>
-                            <th>Sisältö</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <span>Gajaja2828</span>
-                            </td>
-                            <td>
-                                <span>15.11.2016 19:15</span>
-                            </td>
-                            <td>
-                                <span>Hei!  Vaikutat mukavalta! </span>
-                            </td>
-                            <td>
-                                <a href="#" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Sovelluksen nimi -->
+            <a class="navbar-brand" href="/">Ystävänvälityspalvelu</a>
         </div>
-        <!-- Add jQuery for bootstrap -->
-        <script src="/static/js/jquery.js"></script>
-        <!-- Add Bootstrap -->
-        <script src="/static/js/bootstrap.js"></script>
-    </body>
+
+        <div class="collapse navbar-collapse" id="navigation">
+            <ul class="nav navbar-nav">
+                <!-- Navigaation linkit -->
+                <li><a th:href="${'/profile/' + kayttajaid}">Omat tiedot</a></li>
+                <li><a href="/mypages">Omat sivut</a></li>
+                <li><a href="/sharedpages">Minulle jaetut sivut</a></li>
+                <li><a href="/pagelist">Selaa sivuja</a></li>
+                <li class="active"><a href="/mymessages">Viestit</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout">Kirjaudu ulos</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div id="received">
+        <h3>Saamasi viestit</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Lähettäjä</th>
+                <th>Aika</th>
+                <th>Sisältö</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="viesti : ${saadutviestit}">
+                <td>
+                    <span th:text="${viesti.lahettajaString}">Tuntematon lähettäjä</span>
+                </td>
+                <td>
+                    <span th:text="${viesti.prettyPrint(viesti.lahetetty)}">Tuntematon aika</span>
+                </td>
+                <td>
+                    <span th:text="${viesti.sisalto}">Tyhjä viesti</span>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="sent">
+        <h3>Lähettämäsi viestit</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Vastaanottaja</th>
+                <th>Aika</th>
+                <th>Sisältö</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="viesti : ${lahetetytviestit}">
+                <td>
+                    <span th:text="${viesti.lahettajaString}"> Tuntematon saaja</span>
+                </td>
+                <td>
+                    <span th:text="${viesti.prettyPrint(viesti.lahetetty)}">Tuntematon aika</span>
+                </td>
+                <td>
+                    <span th:text="${viesti.sisalto}">Tyhjä viesti</span>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Add jQuery for bootstrap -->
+<script src="/static/js/jquery.js"></script>
+<!-- Add Bootstrap -->
+<script src="/static/js/bootstrap.js"></script>
+</body>
 
 
 </html>

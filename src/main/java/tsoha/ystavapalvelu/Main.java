@@ -7,6 +7,7 @@ import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tsoha.ystavapalvelu.controller.AsiakasController;
 import tsoha.ystavapalvelu.controller.EsittelySivuController;
+import tsoha.ystavapalvelu.controller.ViestiController;
 import tsoha.ystavapalvelu.database.Database;
 import tsoha.ystavapalvelu.models.page.EsittelySivu;
 import tsoha.ystavapalvelu.models.user.Asiakas;
@@ -49,18 +50,8 @@ public class Main {
 
         AsiakasController asiakasController = new AsiakasController(database);
         EsittelySivuController esittelySivuController = new EsittelySivuController(database);
-        
+        ViestiController viestiController = new ViestiController(database);
 
-        
-        get("/sendmessage/1", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "lahetaviesti");
-        }, new ThymeleafTemplateEngine());
-        
-        get("/mymessages", (req, res) -> {
-            HashMap map = new HashMap<>();
-            return new ModelAndView(map, "omatviestit");
-        }, new ThymeleafTemplateEngine());
 
 
 

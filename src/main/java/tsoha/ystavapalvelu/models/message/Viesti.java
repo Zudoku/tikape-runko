@@ -1,16 +1,25 @@
 package tsoha.ystavapalvelu.models.message;
 
-public class Viesti {
-    private Integer lahettaja;
-    private Integer asiakas;
-    private long lahetetty;
-    private String sisalto;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
-    public Viesti(Integer lahettaja, Integer asiakas, long lahetetty, String sisalto) {
-        this.lahettaja = lahettaja;
-        this.asiakas = asiakas;
-        this.lahetetty = lahetetty;
-        this.sisalto = sisalto;
+public class Viesti {
+    private Integer id;
+    private Integer lahettaja;
+    private Integer vastaanottaja;
+    private Timestamp lahetetty;
+    private String sisalto;
+    private String lahettajaString;
+    private String vastaanOttajaString;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getLahettaja() {
@@ -21,19 +30,19 @@ public class Viesti {
         this.lahettaja = lahettaja;
     }
 
-    public Integer getAsiakas() {
-        return asiakas;
+    public Integer getVastaanottaja() {
+        return vastaanottaja;
     }
 
-    public void setAsiakas(Integer asiakas) {
-        this.asiakas = asiakas;
+    public void setVastaanottaja(Integer vastaanottaja) {
+        this.vastaanottaja = vastaanottaja;
     }
 
-    public long getLahetetty() {
+    public Timestamp getLahetetty() {
         return lahetetty;
     }
 
-    public void setLahetetty(long lahetetty) {
+    public void setLahetetty(Timestamp lahetetty) {
         this.lahetetty = lahetetty;
     }
 
@@ -43,5 +52,35 @@ public class Viesti {
 
     public void setSisalto(String sisalto) {
         this.sisalto = sisalto;
+    }
+
+    public Viesti(Integer id, Integer lahettaja, Integer vastaanottaja, Timestamp lahetetty, String sisalto) {
+        this.id = id;
+
+        this.lahettaja = lahettaja;
+        this.vastaanottaja = vastaanottaja;
+        this.lahetetty = lahetetty;
+        this.sisalto = sisalto;
+    }
+
+    public String prettyPrint(Timestamp stamp) {
+        return LocalDateTime.ofEpochSecond(stamp.getTime(), stamp.getNanos(), ZoneOffset.ofHours(1))
+                .format(DateTimeFormatter.ofPattern("dd.MM.uuuu HH:mm:ss"));
+    }
+
+    public String getLahettajaString() {
+        return lahettajaString;
+    }
+
+    public void setLahettajaString(String lahettajaString) {
+        this.lahettajaString = lahettajaString;
+    }
+
+    public String getVastaanOttajaString() {
+        return vastaanOttajaString;
+    }
+
+    public void setVastaanOttajaString(String vastaanOttajaString) {
+        this.vastaanOttajaString = vastaanOttajaString;
     }
 }

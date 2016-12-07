@@ -40,6 +40,7 @@ public class EsittelySivuController {
             map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
             map.put("kayttajaid",  sessioAsiakas.getId());
 
+
             map.put("esittelysivut",esittelySivuDao.findAllWithOmistajaId(sessioAsiakas.getId()));
 
             return new ModelAndView(map, "omatesittelysivut");
@@ -109,6 +110,14 @@ public class EsittelySivuController {
 
         get("/sharedpages", (req, res) -> {
             HashMap map = new HashMap<>();
+            Asiakas sessioAsiakas = req.session().attribute("asiakas");
+            if(sessioAsiakas == null) {
+                res.redirect("/?norights=1", 302);
+            }
+            map.put("kirjautunut", false);
+            map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
+            map.put("kayttajaid",  sessioAsiakas.getId());
+
             return new ModelAndView(map, "esittelysivujaetut");
         }, new ThymeleafTemplateEngine());
 

@@ -50,8 +50,8 @@
                         <ul>
                             <li th:text="${esittelysivu.omistaja_id}">Nimi</li>
                             <li th:text="${'Julkisuus: ' + ((esittelysivu.julkinen) ? 'Julkinen' : 'Yksityinen')}">Julkisuus: ???</li>
-                            <li th:text="${'Luotu: ' + esittelysivu.luotu}">Luotu ___</li>
-                            <li th:text="${'Muokattu: ' + esittelysivu.muokattu}">Muokattu 15.11.2016 17:15</li>
+                            <li th:text="${'Luotu: ' + esittelysivu.prettyPrint(esittelysivu.luotu)}">Luotu ___</li>
+                            <li th:text="${'Muokattu: ' + esittelysivu.prettyPrint(muokattu)}">Muokattu 15.11.2016 17:15</li>
                         </ul>
                         <p th:text="${esittelysivu.leipateksti}">leipateksti</p>
                         <a th:classappend="${mypage} ? hidden : t" class="btn btn-default" th:href="${'/sendmessage/' + esittelysivu.sivu_id}">Laita viesti</a>
