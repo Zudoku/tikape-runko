@@ -12,7 +12,7 @@ public class Viesti {
     private Timestamp lahetetty;
     private String sisalto;
     private String lahettajaString;
-    private String vastaanOttajaString;
+    private String vastaanottajaString;
 
     public Integer getId() {
         return id;
@@ -76,11 +76,11 @@ public class Viesti {
         this.lahettajaString = lahettajaString;
     }
 
-    public String getVastaanOttajaString() {
-        return vastaanOttajaString;
+    public String getVastaanottajaString() {
+        return vastaanottajaString;
     }
 
-    public void setVastaanOttajaString(String vastaanOttajaString) {
-        this.vastaanOttajaString = vastaanOttajaString;
+    public void setVastaanottajaString(String vastaanottajaString) {
+        this.vastaanottajaString = vastaanottajaString;
     }
 }

@@ -120,7 +120,7 @@ public class ViestiDao implements Dao<Viesti, Integer>{
 
         while(result.next()){
             Viesti viesti = collect(result);
-            viesti.setVastaanOttajaString(haeVastaanottajanNimi(viesti));
+            viesti.setVastaanottajaString(haeVastaanottajanNimi(viesti));
             viestit.add(viesti);
         }
         statement.close();
