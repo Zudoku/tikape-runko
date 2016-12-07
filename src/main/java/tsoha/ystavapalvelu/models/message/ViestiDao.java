@@ -15,6 +15,7 @@ public class ViestiDao implements Dao<Viesti, Integer>{
     public ViestiDao(Database database) {
         this.database = database;
     }
+
     private Viesti collect(ResultSet results) throws SQLException {
         int id = results.getInt("id");
         int lahettaja = results.getInt("lahettaja");

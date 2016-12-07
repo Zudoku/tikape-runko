@@ -120,10 +120,10 @@ public class ViestiController {
             return new ModelAndView(map, "omatviestit");
         }, new ThymeleafTemplateEngine());
 
-        get("/message/:lahettajaId/delete", (req, res) -> {
+        get("/message/:viestiId/delete", (req, res) -> {
             HashMap map = new HashMap<>();
-            Integer lahettajaId = Integer.parseInt(req.params("lahettajaId"));
-            Viesti viesti = viestiDao.findOne(lahettajaId);
+            Integer viestiId = Integer.parseInt(req.params("viestiId"));
+            Viesti viesti = viestiDao.findOne(viestiId);
             Asiakas sessioAsiakas = req.session().attribute("asiakas");
             if(sessioAsiakas == null || viesti.getLahettaja() != sessioAsiakas.getId()) {
                 res.redirect("/?norights=1", 302);

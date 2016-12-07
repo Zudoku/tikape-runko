@@ -44,7 +44,7 @@
 
 <div class="container">
     <div th:hidden="${!added}" class="alert alert-success">
-        Uusi Viesti laitettu!
+        Viesti lähetetty!
     </div>
     <div th:hidden="${!deleted}" class="alert alert-warning">
         Viesti poistettu!
@@ -73,6 +73,7 @@
                 </td>
                 <td>
                     <a href="#" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
+                    <a th:href="${'message/' + viesti.lahettaja + '/send'}" class="btn btn-primary">Vastaa</a>
                 </td>
             </tr>
             </tbody>
@@ -92,7 +93,7 @@
             <tbody>
             <tr th:each="viesti : ${lahetetytviestit}">
                 <td>
-                    <span th:text="${viesti.lahettajaString}"> Tuntematon saaja</span>
+                    <span th:text="${viesti.vastaanottajaString}"> Tuntematon saaja</span>
                 </td>
                 <td>
                     <span th:text="${viesti.prettyPrint(viesti.lahetetty)}">Tuntematon aika</span>
@@ -102,6 +103,7 @@
                 </td>
                 <td>
                     <a href="#" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
+                    <a th:href="${'message/' + viesti.id + '/delete'}" class="btn btn-danger">Poista viesti</a>
                 </td>
             </tr>
             </tbody>
