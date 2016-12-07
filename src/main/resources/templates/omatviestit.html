@@ -109,6 +109,39 @@
             </tbody>
         </table>
     </div>
+    <div id="debug">
+        <h3>debug</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Vastaanottaja</th>
+                <th>Lähettäjä</th>
+                <th>Aika</th>
+                <th>Sisältö</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="viesti : ${lahetetytviestit}">
+                <td>
+                    <span th:text="${viesti.vastaanottaja}"> Tuntematon saaja</span>
+                </td>
+                <td>
+                    <span th:text="${viesti.lahettaja}"> Tuntematon saaja</span>
+                </td>
+                <td>
+                    <span th:text="${viesti.lahetetty}">Tuntematon aika</span>
+                </td>
+                <td>
+                    <span th:text="${viesti.sisalto}">Tyhjä viesti</span>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <!-- Add jQuery for bootstrap -->
 <script src="/static/js/jquery.js"></script>
