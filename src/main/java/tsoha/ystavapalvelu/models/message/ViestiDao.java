@@ -35,8 +35,10 @@ public class ViestiDao implements Dao<Viesti, Integer>{
 
         ResultSet result = statement.executeQuery();
 
-        String name = result.getString("kayttajanimi");
-
+        String name = "";
+        if(result.next()) {
+            name = result.getString("kayttajanimi");
+        }
         result.close();
         statement.close();
         connection.close();
@@ -56,9 +58,10 @@ public class ViestiDao implements Dao<Viesti, Integer>{
         statement.setInt(1, viesti.getLahettaja());
 
         ResultSet result = statement.executeQuery();
-
-        String name = result.getString("kayttajanimi");
-
+        String name = "";
+        if(result.next()) {
+            name = result.getString("kayttajanimi");
+        }
         result.close();
         statement.close();
         connection.close();
