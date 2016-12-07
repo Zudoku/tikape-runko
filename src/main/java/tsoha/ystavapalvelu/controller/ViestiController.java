@@ -115,7 +115,7 @@ public class ViestiController {
 
             map.put("saadutviestit", viestiDao.findAllVastaanotettu(sessioAsiakas.getId()));
             map.put("lahetetytviestit", viestiDao.findAllLahetetty(sessioAsiakas.getId()));
-
+            map.put("debug", viestiDao.findAll());
 
             return new ModelAndView(map, "omatviestit");
         }, new ThymeleafTemplateEngine());
