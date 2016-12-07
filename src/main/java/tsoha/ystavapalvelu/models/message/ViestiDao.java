@@ -17,7 +17,7 @@ public class ViestiDao implements Dao<Viesti, Integer>{
     }
     private Viesti collect(ResultSet results) throws SQLException {
         int id = results.getInt("id");
-        int lahettaja = results.getInt("vastaanottaja");
+        int lahettaja = results.getInt("lahettaja");
         int vastaanttaja = results.getInt("vastaanottaja");
         Timestamp lahetetty = results.getTimestamp("lahetetty");
         String sisalto = results.getString("sisalto");
