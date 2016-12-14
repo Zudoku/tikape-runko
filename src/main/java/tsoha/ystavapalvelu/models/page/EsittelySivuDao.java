@@ -93,6 +93,40 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         return esittelySivu;
     }
 
+    public List<EsittelySivu> search(String haku, List<Integer> kiinnostavatIdt) throws SQLException {
+        List<EsittelySivu> esittelySivu = new ArrayList<>();
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM Esittelysivu WHERE " +
+                        "julkinen=true AND " +
+                        "otsikko LIKE ? AND " +
+                        "ORDER BY muokattu DESC"
+        );
+        statement.setString(2, "%" + haku + "%");
+        ResultSet result = statement.executeQuery();
+
+        while(result.next()){
+            EsittelySivu loydos = collect(result);
+            loydos.setOmistajaString(findOmistaja(loydos.getOmistaja_id()));
+            esittelySivu.add(loydos);
+        }
+        statement.close();
+        result.close();
+        connection.close();
+
+
+        List<EsittelySivu> lopullisetSivut = new ArrayList<>();
+
+        esittelySivu.forEach(sivu -> {
+            if(kiinnostavatIdt.contains(sivu.getOmistaja_id())) {
+                lopullisetSivut.add(sivu);
+            }
+        });
+
+        return lopullisetSivut;
+    }
+
+
     public List<EsittelySivu> findAllWithOmistajaId(int omistaja_id) throws SQLException {
         List<EsittelySivu> esittelySivu = new ArrayList<>();
         Connection connection = database.getConnection();

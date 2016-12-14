@@ -57,6 +57,6 @@ CREATE TABLE Lasku (
     id SERIAL PRIMARY KEY,
     asiakas_id integer REFERENCES Asiakas (id),
     yllapitaja_id integer REFERENCES Yllapitaja (id),
-    maara decimal NOT NULL
+    laskutusaika timestamp NOT NULL
 );
 

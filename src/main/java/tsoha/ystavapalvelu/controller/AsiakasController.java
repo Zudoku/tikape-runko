@@ -98,6 +98,7 @@ public class AsiakasController {
             HashMap map = new HashMap<>();
             boolean badCreds = "1".equals(req.queryParams("badcreds"));
             map.put("badcreds", badCreds);
+            map.put("adminlogin", false);
             return new ModelAndView(map, "login");
         }, new ThymeleafTemplateEngine());
 

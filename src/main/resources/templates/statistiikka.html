@@ -1,0 +1,100 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Ystävänvälityspalvelu</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/ystavapalvelu.css" />
+</head>
+
+
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Sovelluksen nimi -->
+            <a class="navbar-brand" href="/">Ystävänvälityspalvelu</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navigation">
+            <ul class="nav navbar-nav">
+                <li><a href="/laskut">Laskut</a></li>
+                <li class="active"><a href="/statistiikka">Statistiikka</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logoutadmin">Kirjaudu ulos</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Statistiikka</th>
+            <th>Arvo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <strong>Käyttäjiä palvelussa</strong>
+            </td>
+            <td>
+                <span th:text="${stats.kayttajia}">???</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Viestejä käyttäjien välillä</strong>
+            </td>
+            <td>
+                <span th:text="${stats.viesteja}">???</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Esittelysivuja</strong>
+            </td>
+            <td>
+                <span th:text="${stats.sivuja}">???</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Laskuja lähetetty</strong>
+            </td>
+            <td>
+                <span th:text="${stats.laskuja}">???</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Ystäväpareja muodostunut</strong>
+            </td>
+            <td>
+                <span th:text="${stats.ystavapareja}">???</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Add jQuery for bootstrap -->
+<script src="/static/js/jquery.js"></script>
+<!-- Add Bootstrap -->
+<script src="/static/js/bootstrap.js"></script>
+</body>
+
+
+</html>

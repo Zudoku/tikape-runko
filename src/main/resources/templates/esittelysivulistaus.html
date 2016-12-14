@@ -43,7 +43,7 @@
 
         <div class="container">
             <div id="pretext">
-                <div clasS="well">
+                <div class="well">
                     <strong>Tällä sivulla näet kaikki julkiset sivut jotka voivat kiinnostavat sinua.
                         Voit hakea esittelysivuja. Hakutulokset suodattuvat myös omissa tiedoissa määrittelemiesi hakukohteiden mukaan.
                         <br/><br/>
@@ -51,6 +51,17 @@
                     </strong>
                 </div>
             </div>
+
+            <div id="searchbar">
+                <form th:action="@{~/pagesearch}" th:object="${pageInfo}" method="post">
+                    <div class="form-group">
+                        <label for="haku">Hae esittelysivuja</label>
+                        <input id="haku" name="haku" type="text" class="form-control" th:value="${haku}"  />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Hae</button>
+                </form>
+            </div>
+
             <div id="results">
                 <div th:each="esittelysivu : ${esittelysivut}" class="row">
                     <div class="well">

@@ -144,4 +144,30 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         connection.close();
 
     }
+
+    public List<Integer> findInterestingUsers(int asiakas_id) throws SQLException {
+        List<Integer> asiakkaat = new ArrayList<>();
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement(
+                "SELECT DISTINCT id FROM Asiakas " +
+                        "LEFT JOIN Asiakashakutarkoitus " +
+                        "ON Asiakas.id=Asiakashakutarkoitus.asiakas_id " +
+                        "WHERE Asiakas.asiakas_id != ? AND" +
+                        "Asiakashakutarkoitus.hakutarkoitus IN " +
+                        "(SELECT hakutarkoitus_id FROM Asiakashakutarkoitus.asiakas_id=?)"
+        );
+
+        statement.setInt(1, asiakas_id);
+        statement.setInt(2, asiakas_id);
+
+        ResultSet results = statement.executeQuery();
+
+        while(results.next()){
+            asiakkaat.add(results.getInt("Asiakas.id"));
+        }
+        statement.close();
+        results.close();
+        connection.close();
+        return asiakkaat;
+    }
 }

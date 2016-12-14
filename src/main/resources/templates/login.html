@@ -14,10 +14,14 @@
 <body>
 <div class="container">
     <h1>Kirjaudu sisään</h1>
-    <div th:hidden="${!badcreds}" class="alert alert-danger">
+    <div th:hidden="${!badcreds || adminlogin}" class="alert alert-danger">
         Väärä nimi tai salasana!
     </div>
-    <form class="lomake" th:action="@{~/login}" th:object="${loginInfo}" method="post">
+    <div th:hidden="${!badcreds || !adminlogin}" class="alert alert-danger">
+        Väärä nimi tai salasana!<br/><br/>
+        HUOM! Tämä login sivu on vain ylläpitäjille.
+    </div>
+    <form class="lomake" th:action="@{~/{address}(address=${(adminlogin)? 'loginadmin' : 'login'})}" th:object="${loginInfo}" method="post">
         <div class="form-group">
             <label for="kayttajanimi">Käyttäjänimesi</label>
             <input id="kayttajanimi" name="kayttajanimi" type="text" class="form-control" placeholder="Nimimerkkisi"/>

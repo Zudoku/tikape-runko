@@ -1,3 +1,10 @@
+INSERT INTO HakuTarkoitus (nimi) VALUES ('Urheilukaveri');
+INSERT INTO HakuTarkoitus (nimi) VALUES ('Onlinekaveri');
+INSERT INTO HakuTarkoitus (nimi) VALUES ('Syvät keskustelut');
+INSERT INTO HakuTarkoitus (nimi) VALUES ('Väittely');
+INSERT INTO HakuTarkoitus (nimi) VALUES ('Baariseura');
+INSERT INTO HakuTarkoitus (nimi) VALUES ('Hengailu');
+
 INSERT INTO Asiakas (kayttajanimi, salasana, syntymaaika, sukupuoli, liittynyt, osoite)
 VALUES ('Toto99112', 'test',CURRENT_DATE,1,CURRENT_DATE,'jokukatu 11C, Espoo, Suomi');
 

@@ -78,6 +78,15 @@
                     <label for="osoite">Osoite</label>
                     <input id="osoite" name="osoite" type="text" class="form-control" placeholder="" th:value="${kayttajatiedot.osoite}" />
                 </div>
+
+                <h3>Hakutarkoitukseni</h3>
+                <div class="form-group" th:each="hakutarkoitus, iter : ${hakutarkoitukset}">
+                    <label th:for="${'hakut' + iter.index}" th:text="${hakutarkoitus.label}"></label>
+                    <input type="checkbox" th:id="${'hakut' + iter.index}" name="${'hakut' + iter.index}" aria-label="" th:checked="${hakutarkoitus.checked}"/>
+                </div>
+
+
+
                 <button type="submit" class="btn btn-success">Päivitä</button>
 
                 <a class="btn btn-danger" th:href="${'/profile/' + kayttajaid + '/delete'}">Poista Käyttäjä</a>

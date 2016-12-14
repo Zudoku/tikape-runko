@@ -6,6 +6,7 @@ import tsoha.ystavapalvelu.database.Database;
 import tsoha.ystavapalvelu.models.page.EsittelySivu;
 import tsoha.ystavapalvelu.models.page.EsittelySivuDao;
 import tsoha.ystavapalvelu.models.user.Asiakas;
+import tsoha.ystavapalvelu.models.user.AsiakasDao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -19,10 +20,12 @@ public class EsittelySivuController {
 
     private Database database;
     private EsittelySivuDao esittelySivuDao;
+    private AsiakasDao asiakasDao;
 
     public EsittelySivuController(Database database) {
         this.database = database;
         this.esittelySivuDao = new EsittelySivuDao(database);
+        this.asiakasDao = new AsiakasDao(database);
         this.init();
     }
 
@@ -98,12 +101,18 @@ public class EsittelySivuController {
             if(sessioAsiakas == null) {
                 res.redirect("/?norights=1", 302);
             }
+            String haku = req.params("haku");
+            if(haku == null) {
+                haku = "";
+            }
 
+
+            map.put("haku", haku);
             map.put("kirjautunut", false);
             map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
             map.put("kayttajaid",  sessioAsiakas.getId());
 
-            map.put("esittelysivut", esittelySivuDao.findAll());
+            map.put("esittelysivut", esittelySivuDao.search(haku, asiakasDao.findInterestingUsers(sessioAsiakas.getId())));
 
             return new ModelAndView(map, "esittelysivulistaus");
         }, new ThymeleafTemplateEngine());
@@ -230,6 +239,17 @@ public class EsittelySivuController {
             esittelySivuDao.delete(sivu.getSivu_id());
 
             res.redirect("/mypages?deleted=1", 302);
+
+
+            return "OK";
+        });
+        post("/pagesearch", (req, res) -> {
+
+
+            String haku = req.queryParams("haku");
+
+
+            res.redirect("/pagelist?haku=" + haku, 302);
 
 
             return "OK";
