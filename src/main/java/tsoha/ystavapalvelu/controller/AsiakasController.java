@@ -9,6 +9,8 @@ import spark.ModelAndView;
 import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import tsoha.ystavapalvelu.models.user.Hakutarkoitus;
+import tsoha.ystavapalvelu.models.user.HakutarkoitusDao;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -23,11 +25,13 @@ public class AsiakasController {
     private AsiakasDao asiakasDao;
     private Database database;
     private ViestiDao viestiDao;
+    private HakutarkoitusDao hakutarkoitusDao;
 
     public AsiakasController(Database database) {
         this.database = database;
         this.asiakasDao = new AsiakasDao(database);
         this.viestiDao = new ViestiDao(database);
+        this.hakutarkoitusDao = new HakutarkoitusDao(database);
         this.init();
     }
 
@@ -89,6 +93,8 @@ public class AsiakasController {
             }
 
             req.session(true).attribute("asiakas", asiakasDao.getAsiakasFromCredentials(kayttajanimi, salasana));
+            Asiakas nykyinenAsiakas = asiakasDao.getAsiakasFromCredentials(kayttajanimi, salasana);
+            hakutarkoitusDao.lisaaHakuValinnatKayttajalle(hakutarkoitusDao.getAloitusValinnat(), nykyinenAsiakas.getId());
             res.redirect("/", 302);
             return "OK";
 
@@ -135,6 +141,7 @@ public class AsiakasController {
             map.put("kayttaja", sessioAsiakas.getKayttajanimi());
             map.put("kayttajatiedot", sessioAsiakas);
             map.put("kayttajaid", sessioAsiakas.getId());
+            map.put("hakutarkoitukset", hakutarkoitusDao.getHakuValinnatKayttajalle(sessioAsiakas.getId()));
 
             if(req.session().attribute("errors") != null) {
                 map.put("errors", req.session().attribute("errors"));
@@ -168,12 +175,22 @@ public class AsiakasController {
             validoiSukupuoli(req.queryParams("sukupuoli"), errors, input);
             validoiSyntymapaiva(req.queryParams("syntymaaika"), errors, input);
 
+            List<String> hakutarkoitusStringit = new ArrayList<String>();
+            for(int i= 0; i < 6; i++) {
+                hakutarkoitusStringit.add(req.queryParams("hakutarkoitus" + i));
+            }
+
+            List<Hakutarkoitus> hakutarkoitukset = validoiHakutarkoitukset(hakutarkoitusStringit, errors, input);
+
             if(!errors.isEmpty()) {
                 req.session().attribute("errors", errors);
                 res.redirect("/profile/" + urlID, 302);
                 return "OK";
             }
+            hakutarkoitusDao.poistaHakuValinnatKayttajalle(sessioAsiakas.getId());
+
             Asiakas uusiAsiakas = asiakasDao.update(input);
+            hakutarkoitusDao.lisaaHakuValinnatKayttajalle(hakutarkoitukset, uusiAsiakas.getId());
             req.session().attribute("asiakas", uusiAsiakas);
 
             res.redirect("/profile/" + urlID + "?updated=1", 302);
@@ -192,6 +209,7 @@ public class AsiakasController {
             }
 
             viestiDao.deleteMessagesRelatedTo(urlID);
+            hakutarkoitusDao.poistaHakuValinnatKayttajalle(urlID);
             asiakasDao.delete(urlID);
             req.session(true);
             req.session().removeAttribute("asiakas");
@@ -211,6 +229,23 @@ public class AsiakasController {
         });
 
 
+    }
+
+    private List<Hakutarkoitus> validoiHakutarkoitukset(List<String> hakutarkoitusStringit, List<String> errors, Asiakas input) {
+        List<Hakutarkoitus> tulos = new ArrayList<>();
+        for(int i = 0; i < hakutarkoitusStringit.size(); i++) {
+            String arvo = hakutarkoitusStringit.get(i);
+            if(arvo == null || arvo.isEmpty()){
+                tulos.add(new Hakutarkoitus(Hakutarkoitus.laabelit.get(i), i, false));
+                continue;
+            }
+            if(arvo.equals("on")) {
+                tulos.add(new Hakutarkoitus(Hakutarkoitus.laabelit.get(i), i, true));
+                continue;
+            }
+            errors.add("Hakutarkoitus on väärässä muodossa! " + input);
+        }
+        return tulos;
     }
 
     private void validoiKayttajanimi(String input, List<String> errors, Asiakas userdata){

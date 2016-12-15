@@ -1,6 +1,12 @@
 package tsoha.ystavapalvelu.models.user;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Hakutarkoitus {
+
+    public static List<String> laabelit = Arrays.asList("Urheilukaveri","Onlinekaveri","Syvät keskustelut","Väittely","Baariseura","Hengailu");
+
     private String label;
     private int id;
     private boolean checked;

@@ -88,16 +88,32 @@ public class YllapitajaDao implements Dao<Yllapitaja, Integer> {
         statement.close();
         result.close();
 
-        statement = connection.prepareStatement(
-                "SELECT COUNT(*) AS sivuja, " +
-                        "((SELECT COUNT(*) FROM EsittelySivu WHERE julkinen=true) " +
-                        "/ (SELECT COUNT(*) FROM EsittelySivu WHERE julkinen=true)) AS sivuyksityisyys " +
-                        "FROM Esittelysivu");
+        statement = connection.prepareStatement("SELECT COUNT(*) AS sivuja FROM Esittelysivu");
         result = statement.executeQuery();
 
         if(result.next()){
             tulos.setSivuja(result.getInt("sivuja"));
-            tulos.setSivuyksityisyys(result.getFloat("sivuyksityisyys"));
+
+        }
+        statement.close();
+        result.close();
+
+        statement = connection.prepareStatement("SELECT COUNT(*) AS laskuja FROM Lasku");
+        result = statement.executeQuery();
+
+        if(result.next()){
+            tulos.setLaskuja(result.getInt("laskuja"));
+
+        }
+        statement.close();
+        result.close();
+
+        statement = connection.prepareStatement("SELECT COUNT(*) AS pareja FROM Ystavapari");
+        result = statement.executeQuery();
+
+        if(result.next()){
+            tulos.setYstavaPareja(result.getInt("pareja"));
+
         }
         statement.close();
         result.close();

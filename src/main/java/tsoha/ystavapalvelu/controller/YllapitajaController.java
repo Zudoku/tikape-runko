@@ -5,7 +5,9 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tsoha.ystavapalvelu.database.Database;
 import tsoha.ystavapalvelu.models.admin.Yllapitaja;
 import tsoha.ystavapalvelu.models.admin.YllapitajaDao;
+import tsoha.ystavapalvelu.models.message.ViestiDao;
 import tsoha.ystavapalvelu.models.user.Asiakas;
+import tsoha.ystavapalvelu.models.user.AsiakasDao;
 
 import java.util.HashMap;
 
@@ -16,6 +18,8 @@ public class YllapitajaController {
 
     private Database database;
     private YllapitajaDao yllapitajaDao;
+    private ViestiDao viestiDao;
+    private AsiakasDao asiakasDao;
 
     public YllapitajaController(Database database) {
         this.database = database;
@@ -38,7 +42,7 @@ public class YllapitajaController {
             Yllapitaja yllapitaja = yllapitajaDao.getYllapitajaFromCredentials(kayttajanimi, salasana);
             if(yllapitaja != null){
                 req.session(true).attribute("admin", yllapitaja);
-                res.redirect("/adminstatistiikka", 302);
+                res.redirect("/statistiikka", 302);
             } else {
 
                 res.redirect("/loginadmin?badcreds=1", 302);
@@ -57,5 +61,30 @@ public class YllapitajaController {
 
             return "OK";
         });
+
+        get("/laskut", (req, res) -> {
+            HashMap map = new HashMap<>();
+
+            Yllapitaja sessioYllapitaja = req.session().attribute("admin");
+            if(sessioYllapitaja == null) {
+                res.redirect("/loginadmin", 302);
+            }
+
+
+            return new ModelAndView(map, "login");
+        }, new ThymeleafTemplateEngine());
+
+        get("/statistiikka", (req, res) -> {
+            HashMap map = new HashMap<>();
+
+            Yllapitaja sessioYllapitaja = req.session().attribute("admin");
+            if(sessioYllapitaja == null) {
+                res.redirect("/loginadmin", 302);
+            }
+            map.put("stats", yllapitajaDao.getStatiikka());
+
+
+            return new ModelAndView(map, "login");
+        }, new ThymeleafTemplateEngine());
     }
 }

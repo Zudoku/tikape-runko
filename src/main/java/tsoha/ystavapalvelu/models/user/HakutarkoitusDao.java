@@ -29,6 +29,12 @@ public class HakutarkoitusDao {
         return hakutarkoitukset;
     }
 
+    public List<Hakutarkoitus> getAloitusValinnat(){
+        List<Hakutarkoitus> hakutarkoitukset = new ArrayList<>();
+        hakutarkoitukset.forEach(hakutarkoitus -> hakutarkoitus.setChecked(true));
+        return hakutarkoitukset;
+    }
+
     public List<Hakutarkoitus> getHakuValinnatKayttajalle(int asiakas_id) throws SQLException {
         List<Hakutarkoitus> tulos = getKaikkiHakuValinnat();
 

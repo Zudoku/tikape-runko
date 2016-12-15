@@ -42,9 +42,8 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Asiakas 1</th>
-            <th>Asiakas 2</th>
-            <th>Aika</th>
+            <th>Asiakas</th>
+            <th>Liittynyt</th>
             <th>Laskutettu</th>
             <th>Laskuttaja</th>
             <th>Laskutus aika</th>
@@ -52,24 +51,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="ystavapari : ${ystavaparit}">
+        <tr th:each="asiakas : ${asiakkaat}">
             <td>
-                <span th:text="${ystavapari.asiakas1nimi}">???</span>
+                <span th:text="${asiakas.nimi}">???</span>
             </td>
             <td>
-                <span th:text="${ystavapari.asiakas2nimi}">???</span>
+                <span th:text="${asiakas.liittynyt}">???</span>
             </td>
             <td>
-                <span th:text="${ystavapari.aika}">???</span>
+                <span th:text="${asiakas.laskutettu}">???</span>
             </td>
             <td>
-                <span th:text="${ystavapari.laskutettu}">???</span>
+                <span th:text="${asiakas.laskuttajanimi}">???</span>
             </td>
             <td>
-                <span th:text="${ystavapari.laskuttajanimi}">???</span>
-            </td>
-            <td>
-                <span th:text="${ystavapari.laskutusaika}">???</span>
+                <span th:text="${asiakas.laskutusaika}">???</span>
             </td>
             <td>
                 <span th:href="${'/page/' + esittelysivu.sivu_id + '/edit'}" class="btn btn-warning">Laskuta</span>
