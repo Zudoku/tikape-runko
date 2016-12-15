@@ -82,5 +82,5 @@ INSERT INTO Ystavapari (asiakas_1, asiakas_2, aika) VALUES (3, 2, CURRENT_TIMEST
 INSERT INTO Esittelysivuasiakas (sivu_id, asiakas_id) VALUES (2, 2);
 
 INSERT INTO Esittelysivuasiakas (sivu_id, asiakas_id) VALUES (5, 1);
-INSERT INTO Esittelysivuasiakas (sivu_id, asiakas_id) VALUES (7, 1);
+INSERT INTO Esittelysivuasiakas (sivu_id, asiakas_id) VALUES (8, 1);
 

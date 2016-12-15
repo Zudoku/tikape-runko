@@ -169,13 +169,15 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         List<EsittelySivu> esittelySivu = new ArrayList<>();
         Connection connection = database.getConnection();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Esittelysivu WHERE " +
-                "julkisuus=false AND sivu_id NOT IN (SELECT sivu_id FROM Esittelysivuasiakas WHERE asiakas_id=?) ORDER BY muokattu DESC");
+                "julkinen=false AND sivu_id NOT IN (SELECT sivu_id FROM Esittelysivuasiakas WHERE asiakas_id=?) ORDER BY muokattu DESC");
 
         statement.setInt(1, asiakas_id);
         ResultSet result = statement.executeQuery();
 
         while(result.next()){
-            esittelySivu.add(collect(result));
+            EsittelySivu a = collect(result);
+            a.setOmistajaString(findOmistaja(a.getOmistaja_id()));
+            esittelySivu.add(a);
         }
         statement.close();
         result.close();

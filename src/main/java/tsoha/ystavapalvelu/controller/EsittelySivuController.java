@@ -54,7 +54,19 @@ public class EsittelySivuController {
             Integer pageId = Integer.parseInt(req.params("pageId"));
             Asiakas sessioAsiakas = req.session().attribute("asiakas");
             EsittelySivu sivu = esittelySivuDao.findOne(pageId);
-            if(sessioAsiakas == null || (sessioAsiakas.getId() != sivu.getOmistaja_id() && !sivu.isJulkinen())) {
+
+            if(sessioAsiakas == null) {
+                res.redirect("/?norights=1", 302);
+            }
+            List<EsittelySivu> jaetut = esittelySivuDao.findAllSharedFor(sessioAsiakas.getId());
+            boolean jaettu = false;
+            for(EsittelySivu esittelysivu : jaetut){
+                if(esittelysivu.getSivu_id() == pageId){
+                    jaettu = true;
+                }
+            };
+
+            if(!jaettu && !sivu.isJulkinen()) {
                 res.redirect("/?norights=1", 302);
             }
 
