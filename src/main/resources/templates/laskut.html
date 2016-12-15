@@ -65,16 +65,16 @@
                 <span th:text="${asiakas.liittynyt}">???</span>
             </td>
             <td>
-                <span th:text="${(asiakas.viesti == null) ? 'ei' : 'kyllä'}">???</span>
+                <span th:text="${(asiakas.lasku == null) ? 'ei' : 'kyllä'}">???</span>
             </td>
             <td>
-                <span th:text="${(asiakas.viesti == null) ? '' : asiakas.viesti.laskuttajaString}">???</span>
+                <span th:text="${(asiakas.lasku == null) ? '' : asiakas.lasku.laskuttajaString}">???</span>
             </td>
             <td>
-                <span th:text="${(asiakas.viesti == null) ? '' : asiakas.viesti.laskutusaika}">???</span>
+                <span th:text="${(asiakas.lasku == null) ? '' : asiakas.lasku.laskutusaika}">???</span>
             </td>
             <td>
-                <a  th:classappend="${(asiakas.viesti == null)} ? hidden : t" th:href="${(asiakas.viesti == null) ? '' : ('/laskuta/' + asiakas.id)}" class="btn btn-warning">Laskuta</a>
+                <a  th:classappend="${(asiakas.lasku == null)} ? hidden : t" th:href="${(asiakas.lasku == null) ? '' : ('/laskuta/' + asiakas.id)}" class="btn btn-warning">Laskuta</a>
             </td>
         </tr>
         </tbody>
