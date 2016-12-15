@@ -39,6 +39,12 @@
 </nav>
 
 <div class="container">
+    <div th:hidden="${!success}" class="alert alert-success">
+        Lasku lähetetty!
+    </div>
+    <div th:hidden="${!error}" class="alert alert-danger">
+        Virhe laskuttamisessa!
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -59,16 +65,16 @@
                 <span th:text="${asiakas.liittynyt}">???</span>
             </td>
             <td>
-                <span th:text="${asiakas.laskutettu}">???</span>
+                <span th:text="${(asiakas.viesti == null) ? 'ei' : 'kyllä'}">???</span>
             </td>
             <td>
-                <span th:text="${asiakas.laskuttajanimi}">???</span>
+                <span th:text="${(asiakas.viesti == null) ? '' : asiakas.viesti.laskuttajaString}">???</span>
             </td>
             <td>
-                <span th:text="${asiakas.laskutusaika}">???</span>
+                <span th:text="${(asiakas.viesti == null) ? '' : asiakas.viesti.laskutusaika}">???</span>
             </td>
             <td>
-                <span th:href="${'/page/' + esittelysivu.sivu_id + '/edit'}" class="btn btn-warning">Laskuta</span>
+                <a  th:classappend="${(asiakas.viesti == null)} ? hidden : t" th:href="${(asiakas.viesti == null) ? '' : ('/laskuta/' + asiakas.id)}" class="btn btn-warning">Laskuta</a>
             </td>
         </tr>
         </tbody>

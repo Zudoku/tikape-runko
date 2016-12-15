@@ -1,6 +1,6 @@
 package tsoha.ystavapalvelu.models.user;
 
-import tsoha.ystavapalvelu.models.message.Viesti;
+import tsoha.ystavapalvelu.models.admin.Lasku;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,7 +15,7 @@ public class Asiakas {
     private int sukupuoli;
     private Date liittynyt;
     private String osoite;
-    private Viesti viesti;
+    private Lasku lasku;
 
     public Asiakas(int id, String kayttajanimi, String salasana, Date syntymaaika, int sukupuoli, Date liittynyt, String osoite) {
         this.id = id;

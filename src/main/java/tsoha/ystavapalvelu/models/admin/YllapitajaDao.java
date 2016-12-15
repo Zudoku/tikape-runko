@@ -2,11 +2,9 @@ package tsoha.ystavapalvelu.models.admin;
 
 import tsoha.ystavapalvelu.database.Dao;
 import tsoha.ystavapalvelu.database.Database;
+import tsoha.ystavapalvelu.models.user.Asiakas;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class YllapitajaDao implements Dao<Yllapitaja, Integer> {
@@ -112,7 +110,7 @@ public class YllapitajaDao implements Dao<Yllapitaja, Integer> {
         result = statement.executeQuery();
 
         if(result.next()){
-            tulos.setYstavapareja(result.getInt("pareja"));
+            tulos.setYstavapareja(result.getInt("pareja") / 2);
 
         }
         statement.close();
@@ -121,5 +119,19 @@ public class YllapitajaDao implements Dao<Yllapitaja, Integer> {
 
         connection.close();
         return tulos;
+    }
+
+    public void lisaaLasku(Asiakas asiakas, Yllapitaja yllapitaja) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Lasku " +
+                "(asiakas_id, yllapitaja_id, laskutusaika) VALUES (?,?,?)");
+
+        statement.setInt(1, asiakas.getId());
+        statement.setInt(2,yllapitaja.getId());
+        statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+
+        statement.execute();
+        statement.close();
+        connection.close();
     }
 }
