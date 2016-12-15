@@ -71,7 +71,7 @@ public class YllapitajaController {
             }
 
 
-            return new ModelAndView(map, "login");
+            return new ModelAndView(map, "laskut");
         }, new ThymeleafTemplateEngine());
 
         get("/statistiikka", (req, res) -> {
@@ -84,7 +84,7 @@ public class YllapitajaController {
             map.put("stats", yllapitajaDao.getStatiikka());
 
 
-            return new ModelAndView(map, "login");
+            return new ModelAndView(map, "statistiikka");
         }, new ThymeleafTemplateEngine());
     }
 }

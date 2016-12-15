@@ -41,8 +41,8 @@ public class HakutarkoitusDao {
         Connection connection = database.getConnection();
         PreparedStatement statement = connection.prepareStatement(
                 "SELECT * FROM Asiakashakutarkoitus " +
-                "INNER JOIN Hakutarkoitus ON Asiakashakutarkoitus.hakutarkoitus_id=Hakutarkoitus.id " +
-                "WHERE asiakas_id=?");
+                "LEFT JOIN Hakutarkoitus ON Asiakashakutarkoitus.hakutarkoitus_id=Hakutarkoitus.id " +
+                "WHERE Asiakashakutarkoitus.asiakas_id=?");
 
         statement.setInt(1, asiakas_id);
         ResultSet resultSet = statement.executeQuery();
