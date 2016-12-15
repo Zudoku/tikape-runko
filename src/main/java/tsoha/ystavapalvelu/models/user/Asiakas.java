@@ -13,7 +13,6 @@ public class Asiakas {
     private int sukupuoli;
     private Date liittynyt;
     private String osoite;
-    private Lasku lasku;
 
     public Asiakas(int id, String kayttajanimi, String salasana, Date syntymaaika, int sukupuoli, Date liittynyt, String osoite) {
         this.id = id;
@@ -80,14 +79,6 @@ public class Asiakas {
 
     public void setOsoite(String osoite) {
         this.osoite = osoite;
-    }
-
-    public Lasku getLasku() {
-        return lasku;
-    }
-
-    public void setLasku(Lasku lasku) {
-        this.lasku = lasku;
     }
 
     public String prettyPrint(Date date) {
