@@ -53,26 +53,6 @@ public class YllapitajaController {
 
         });
 
-        get("/laskuta/:userId", (req, res) -> {
-            Yllapitaja sessioYllapitaja = req.session().attribute("admin");
-
-            if(sessioYllapitaja == null) {
-                res.redirect("/loginadmin", 302);
-            }
-            Integer userId = Integer.parseInt(req.params("userId"));
-
-            Asiakas loytynytAsiakas = asiakasDao.findOne(userId);
-
-            if(loytynytAsiakas != null) {
-                yllapitajaDao.lisaaLasku(loytynytAsiakas, sessioYllapitaja);
-                res.redirect("/laskut?success=1", 302);
-            } else {
-                res.redirect("/laskut?error=1", 302);
-            }
-
-            return "OK";
-
-        });
 
         get("/logoutadmin", (req, res) -> {
             Yllapitaja sessioYllapitaja = req.session().attribute("admin");
@@ -83,23 +63,6 @@ public class YllapitajaController {
 
             return "OK";
         });
-
-        get("/laskut", (req, res) -> {
-            HashMap map = new HashMap<>();
-
-            Yllapitaja sessioYllapitaja = req.session().attribute("admin");
-
-            if(sessioYllapitaja == null) {
-                res.redirect("/loginadmin", 302);
-            }
-            map.put("success", "1".equals(req.queryParams("success")));
-            map.put("error", "1".equals(req.queryParams("error")));
-
-            map.put("asiakkaat", asiakasDao.findAll());
-
-
-            return new ModelAndView(map, "laskut");
-        }, new ThymeleafTemplateEngine());
 
         get("/statistiikka", (req, res) -> {
             HashMap map = new HashMap<>();

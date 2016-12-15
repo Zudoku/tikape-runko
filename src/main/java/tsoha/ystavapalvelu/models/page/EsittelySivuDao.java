@@ -146,6 +146,58 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         return esittelySivu;
     }
 
+    public List<EsittelySivu> findAllSharedFor(int asiakas_id) throws SQLException {
+        List<EsittelySivu> esittelySivu = new ArrayList<>();
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM Esittelysivu WHERE " +
+                "sivu_id IN (SELECT sivu_id FROM Esittelysivuasiakas WHERE asiakas_id=?) ORDER BY muokattu DESC");
+
+        statement.setInt(1, asiakas_id);
+        ResultSet result = statement.executeQuery();
+
+        while(result.next()){
+            esittelySivu.add(collect(result));
+        }
+        statement.close();
+        result.close();
+        connection.close();
+
+        return esittelySivu;
+    }
+
+    public List<EsittelySivu> findAllShareable(int asiakas_id) throws SQLException {
+        List<EsittelySivu> esittelySivu = new ArrayList<>();
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM Esittelysivu WHERE " +
+                "julkisuus=false AND sivu_id NOT IN (SELECT sivu_id FROM Esittelysivuasiakas WHERE asiakas_id=?) ORDER BY muokattu DESC");
+
+        statement.setInt(1, asiakas_id);
+        ResultSet result = statement.executeQuery();
+
+        while(result.next()){
+            esittelySivu.add(collect(result));
+        }
+        statement.close();
+        result.close();
+        connection.close();
+
+        return esittelySivu;
+    }
+
+    public void lisaaJako(int asiakas_id, int page_id) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Esittelysivuasiakas (sivu_id, asiakas_id) " +
+                "VALUES (?,?)");
+
+        statement.setInt(1, page_id);
+        statement.setInt(2, asiakas_id);
+
+        statement.execute();
+
+        statement.close();
+        connection.close();
+    }
+
     @Override
     public void delete(Integer key) throws SQLException {
         Connection connection = database.getConnection();

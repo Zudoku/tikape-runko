@@ -2,7 +2,6 @@ package tsoha.ystavapalvelu.models.user;
 
 import tsoha.ystavapalvelu.database.Dao;
 import tsoha.ystavapalvelu.database.Database;
-import tsoha.ystavapalvelu.models.admin.Lasku;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,7 +103,9 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         List<Asiakas> asiakkaat = new ArrayList<>();
         Connection connection = database.getConnection();
         PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM Asiakas " +
+                "SELECT *" +
+                        ", Lasku.asiakas_id AS \"la_aid\", Yllapitaja.kayttajanimi AS \"yl_ka\" " +
+                        "FROM Asiakas " +
                         "LEFT JOIN Lasku ON Asiakas.id=Lasku.asiakas_id " +
                         "LEFT JOIN Yllapitaja ON Lasku.yllapitaja_id=Yllapitaja.id"
         );
@@ -113,22 +114,6 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
 
         while(results.next()){
             Asiakas loytynyt = collect(results);
-            try {
-                int index = results.findColumn("Yllapitaja.kayttajanimi");
-                String yllapitajaString = results.getString("Yllapitaja.kayttajanimi");
-                if (yllapitajaString == null || yllapitajaString.isEmpty()) {
-                    Lasku lasku = new Lasku(results.getInt("Lasku.id"),
-                            results.getInt("Lasku.asiakas_id"),
-                            results.getInt("Yllapitaja.id"),
-                            results.getTimestamp("Lasku.laskutusaika"));
-                    lasku.setYllapitajaString(yllapitajaString);
-                }
-            } catch (SQLException e) {
-
-            }
-
-
-
             asiakkaat.add(loytynyt);
         }
         statement.close();

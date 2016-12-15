@@ -43,23 +43,24 @@
 
         <div class="container">
             <div id="pretext">
-                <div clasS="well">
+                <div class="well">
                     <strong>Tällä sivulla näet kaikki sinulle jaetut esittelysivut. <br/><br/>
-                        <div class="text-danger">HUOM! Tätä osaa sivustosta ei ole ihan vielä tehty! </div>
                     </strong>
                 </div>
             </div>
             <div id="results">
-                <div class="row">
+                <div th:each="esittelysivu : ${esittelysivut}" class="row">
                     <div class="well">
-                        <h3>Etsin tennisseuraa</h3>
+
+                        <strong>
+                            <span th:text="${esittelysivu.otsikko}"></span>
+                        </strong>
                         <ul>
-                            <li>Gajaja2828</li>
-                            <li>Luotu 15.11.2016 17:15</li>
-                            <li>Yksityinen sivu</li>
+                            <li>Luoja: <span th:text="${esittelysivu.omistajaString}"></span></li>
+                            <li>Luotu <span th:text="${esittelysivu.prettyPrint(esittelysivu.luotu)}"></span></li>
                         </ul>
-                        <p>Hei! Etsin kaikenikäistä kaveria pelaamaan kanssani Tennistä</p>
-                        <a class="btn btn-default" href="/page/1">Lue lisää</a>
+                        <p th:text="${esittelysivu.leipateksti}"></p>
+                        <a class="btn btn-default" th:href="${'/page/' + esittelysivu.sivu_id}">Lue lisää</a>
                     </div>
                 </div>
             </div>

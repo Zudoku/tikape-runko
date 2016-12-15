@@ -72,7 +72,7 @@
                     <span th:text="${viesti.sisalto}">Tyhjä viesti</span>
                 </td>
                 <td>
-                    <a href="#" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
+                    <a th:classappend="${(viesti.lahettaja == 0)} ? hidden : t" th:href="${'/page/share/' + viesti.lahettaja}" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
                     <a th:href="${'message/' + viesti.lahettaja + '/send'}" class="btn btn-primary">Vastaa</a>
                 </td>
             </tr>
@@ -102,7 +102,7 @@
                     <span th:text="${viesti.sisalto}">Tyhjä viesti</span>
                 </td>
                 <td>
-                    <a href="#" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
+                    <a th:href="${'/page/share/' + viesti.vastaanottaja}" href="#" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
                     <a th:href="${'message/' + viesti.id + '/delete'}" class="btn btn-danger">Poista viesti</a>
                 </td>
             </tr>

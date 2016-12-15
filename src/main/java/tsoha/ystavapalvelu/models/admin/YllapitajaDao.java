@@ -120,18 +120,4 @@ public class YllapitajaDao implements Dao<Yllapitaja, Integer> {
         connection.close();
         return tulos;
     }
-
-    public void lisaaLasku(Asiakas asiakas, Yllapitaja yllapitaja) throws SQLException {
-        Connection connection = database.getConnection();
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO Lasku " +
-                "(asiakas_id, yllapitaja_id, laskutusaika) VALUES (?,?,?)");
-
-        statement.setInt(1, asiakas.getId());
-        statement.setInt(2,yllapitaja.getId());
-        statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-
-        statement.execute();
-        statement.close();
-        connection.close();
-    }
 }

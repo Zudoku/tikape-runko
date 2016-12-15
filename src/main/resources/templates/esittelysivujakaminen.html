@@ -1,0 +1,84 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Ystävänvälityspalvelu</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/ystavapalvelu.css" />
+</head>
+
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Sovelluksen nimi -->
+            <a class="navbar-brand" href="/">Ystävänvälityspalvelu</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navigation">
+            <ul class="nav navbar-nav">
+                <!-- Navigaation linkit -->
+                <li><a th:href="${'/profile/' + kayttajaid}">Omat tiedot</a></li>
+                <li><a href="/mypages">Omat sivut</a></li>
+                <li><a href="/sharedpages">Minulle jaetut sivut</a></li>
+                <li><a href="/pagelist">Selaa sivuja</a></li>
+                <li><a href="/mymessages">Viestit</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout">Kirjaudu ulos</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div id="pretext">
+        <div class="well">
+            <strong>Tällä sivulla voit jakaa yksityisiä esittelysivuja henkilölle <span th:text="targetasiakas"></span> <br/><br/> </strong>
+        </div>
+    </div>
+    <div id="results">
+        <div th:hidden="${!error}" class="alert alert-success">
+            Virhe jakamisessa!
+        </div>
+        <div th:hidden="${!success}" class="alert alert-success">
+            Jakaminen onnistui!
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Otsikko</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="esittelysivu : ${esittelysivut}">
+                <td>
+                    <a th:href="${'/page/' + esittelysivu.sivu_id}" th:text="${esittelysivu.otsikko}">a</a>
+                </td>
+                <td>
+                    <a th:href="${'/page/share/' + targetasiakasid + '/' + esittelysivu.sivu_id}" class="btn btn-warning">Jaa sivu</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Add jQuery for bootstrap -->
+<script src="/static/js/jquery.js"></script>
+<!-- Add Bootstrap -->
+<script src="/static/js/bootstrap.js"></script>
+</body>
+
+
+</html>

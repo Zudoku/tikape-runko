@@ -84,5 +84,3 @@ INSERT INTO Esittelysivuasiakas (sivu_id, asiakas_id) VALUES (2, 2);
 INSERT INTO Esittelysivuasiakas (sivu_id, asiakas_id) VALUES (5, 1);
 INSERT INTO Esittelysivuasiakas (sivu_id, asiakas_id) VALUES (7, 1);
 
-INSERT INTO Lasku (asiakas_id, yllapitaja_id, laskutusaika) VALUES (1, 1, CURRENT_TIMESTAMP);
-

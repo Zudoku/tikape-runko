@@ -126,9 +126,52 @@ public class EsittelySivuController {
             map.put("kirjautunut", false);
             map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
             map.put("kayttajaid",  sessioAsiakas.getId());
+            map.put("esittelysivut", esittelySivuDao.findAllSharedFor(sessioAsiakas.getId()));
 
             return new ModelAndView(map, "esittelysivujaetut");
         }, new ThymeleafTemplateEngine());
+
+        get("/page/share/:userId", (req, res) -> {
+            HashMap map = new HashMap<>();
+            Asiakas sessioAsiakas = req.session().attribute("asiakas");
+            if(sessioAsiakas == null) {
+                res.redirect("/?norights=1", 302);
+            }
+            Integer userId = Integer.parseInt(req.params("userId"));
+            map.put("kirjautunut", false);
+            map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
+            map.put("kayttajaid",  sessioAsiakas.getId());
+            map.put("error", "1".equals(req.queryParams("error")));
+            map.put("success", "1".equals(req.queryParams("success")));
+            map.put("targetasiakas", asiakasDao.findOne(userId).getKayttajanimi());
+            map.put("targetasiakasid", asiakasDao.findOne(userId).getId());
+            map.put("esittelysivut", esittelySivuDao.findAllShareable(userId));
+
+            return new ModelAndView(map, "esittelysivujakaminen");
+        }, new ThymeleafTemplateEngine());
+
+        get("/page/share/:userId/:pageId", (req, res) -> {
+            HashMap map = new HashMap<>();
+            Asiakas sessioAsiakas = req.session().attribute("asiakas");
+            if(sessioAsiakas == null) {
+                res.redirect("/?norights=1", 302);
+            }
+            Integer pageId = Integer.parseInt(req.params("pageId"));
+            Integer userId = Integer.parseInt(req.params("userId"));
+
+            Asiakas asiakas = asiakasDao.findOne(userId);
+            EsittelySivu sivu = esittelySivuDao.findOne(pageId);
+
+            if(asiakas != null && sivu.getOmistaja_id() == sessioAsiakas.getId()) {
+                esittelySivuDao.lisaaJako(asiakas.getId(), sivu.getSivu_id());
+                res.redirect("/page/share/" + pageId + "?success=1", 302);
+            } else {
+                res.redirect("/page/share/" + pageId + "?error=1", 302);
+            }
+
+
+            return "OK";
+        });
 
         get("/newpage", (req, res) -> {
             HashMap map = new HashMap<>();

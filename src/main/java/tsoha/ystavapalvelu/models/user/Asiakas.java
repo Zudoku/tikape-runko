@@ -1,8 +1,5 @@
 package tsoha.ystavapalvelu.models.user;
 
-import tsoha.ystavapalvelu.models.admin.Lasku;
-
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

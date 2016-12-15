@@ -53,10 +53,3 @@ CREATE TABLE Yllapitaja (
     salasana varchar(100) NOT NULL
 );
 
-CREATE TABLE Lasku (
-    id SERIAL PRIMARY KEY,
-    asiakas_id integer REFERENCES Asiakas (id),
-    yllapitaja_id integer REFERENCES Yllapitaja (id),
-    laskutusaika timestamp NOT NULL
-);
-
