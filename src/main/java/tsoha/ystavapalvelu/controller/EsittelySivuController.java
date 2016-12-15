@@ -157,7 +157,7 @@ public class EsittelySivuController {
             map.put("success", "1".equals(req.queryParams("success")));
             map.put("targetasiakas", asiakasDao.findOne(userId).getKayttajanimi());
             map.put("targetasiakasid", asiakasDao.findOne(userId).getId());
-            map.put("esittelysivut", esittelySivuDao.findAllShareable(userId));
+            map.put("esittelysivut", esittelySivuDao.findAllShareable(userId, sessioAsiakas.getId()));
 
             return new ModelAndView(map, "esittelysivujakaminen");
         }, new ThymeleafTemplateEngine());
@@ -176,9 +176,9 @@ public class EsittelySivuController {
 
             if(asiakas != null && sivu.getOmistaja_id() == sessioAsiakas.getId()) {
                 esittelySivuDao.lisaaJako(asiakas.getId(), sivu.getSivu_id());
-                res.redirect("/page/share/" + pageId + "?success=1", 302);
+                res.redirect("/page/share/" + userId + "?success=1", 302);
             } else {
-                res.redirect("/page/share/" + pageId + "?error=1", 302);
+                res.redirect("/page/share/" + userId + "?error=1", 302);
             }
 
 

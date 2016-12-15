@@ -156,7 +156,9 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         ResultSet result = statement.executeQuery();
 
         while(result.next()){
-            esittelySivu.add(collect(result));
+            EsittelySivu a = collect(result);
+            a.setOmistajaString(findOmistaja(a.getOmistaja_id()));
+            esittelySivu.add(a);
         }
         statement.close();
         result.close();
@@ -165,13 +167,16 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         return esittelySivu;
     }
 
-    public List<EsittelySivu> findAllShareable(int asiakas_id) throws SQLException {
+    public List<EsittelySivu> findAllShareable(int asiakas_id, int omistaja_id) throws SQLException {
         List<EsittelySivu> esittelySivu = new ArrayList<>();
         Connection connection = database.getConnection();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Esittelysivu WHERE " +
-                "julkinen=false AND sivu_id NOT IN (SELECT sivu_id FROM Esittelysivuasiakas WHERE asiakas_id=?) ORDER BY muokattu DESC");
+                "julkinen=false AND " +
+                "omistaja_id=? AND " +
+                "sivu_id NOT IN (SELECT sivu_id FROM Esittelysivuasiakas WHERE asiakas_id=?) ORDER BY muokattu DESC");
 
-        statement.setInt(1, asiakas_id);
+        statement.setInt(1, omistaja_id);
+        statement.setInt(2, asiakas_id);
         ResultSet result = statement.executeQuery();
 
         while(result.next()){
