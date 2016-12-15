@@ -99,7 +99,7 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
         PreparedStatement statement = connection.prepareStatement(
                 "SELECT * FROM Esittelysivu WHERE " +
                         "julkinen=true AND " +
-                        "otsikko LIKE ? AND " +
+                        "otsikko LIKE ? " +
                         "ORDER BY muokattu DESC"
         );
         statement.setString(1, "%" + haku + "%");
