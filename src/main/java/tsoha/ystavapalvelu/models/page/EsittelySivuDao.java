@@ -102,7 +102,7 @@ public class EsittelySivuDao implements Dao<EsittelySivu, Integer> {
                         "otsikko LIKE ? AND " +
                         "ORDER BY muokattu DESC"
         );
-        statement.setString(2, "%" + haku + "%");
+        statement.setString(1, "%" + haku + "%");
         ResultSet result = statement.executeQuery();
 
         while(result.next()){
