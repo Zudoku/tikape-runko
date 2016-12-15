@@ -60,7 +60,7 @@ public class ViestiDao implements Dao<Viesti, Integer>{
         statement.setInt(1, viesti.getLahettaja());
 
         ResultSet result = statement.executeQuery();
-        String name = "";
+        String name = "Anonyymi";
         if(result.next()) {
             name = result.getString("kayttajanimi");
         }

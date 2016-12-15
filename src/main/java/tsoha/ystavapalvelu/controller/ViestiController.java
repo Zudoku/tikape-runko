@@ -129,6 +129,10 @@ public class ViestiController {
             }
             Integer messageId = Integer.parseInt(req.params("messageId"));
             Viesti muokattava = viestiDao.findOne(messageId);
+
+            if(muokattava.getLahettaja() != sessioAsiakas.getId()) {
+                res.redirect("/mymessages?error=1", 302);
+            }
             map.put("targetAsiakas", asiakasDao.findOne(muokattava.getVastaanottaja()));
 
             map.put("kirjautunut", false);

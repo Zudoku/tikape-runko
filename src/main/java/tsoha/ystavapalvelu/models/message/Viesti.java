@@ -56,11 +56,11 @@ public class Viesti {
 
     public Viesti(Integer id, Integer lahettaja, Integer vastaanottaja, Timestamp lahetetty, String sisalto) {
         this.id = id;
-
         this.lahettaja = lahettaja;
         this.vastaanottaja = vastaanottaja;
         this.lahetetty = lahetetty;
         this.sisalto = sisalto;
+
     }
 
     public String prettyPrint(Timestamp stamp) {
