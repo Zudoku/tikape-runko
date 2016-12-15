@@ -112,7 +112,7 @@ public class YllapitajaDao implements Dao<Yllapitaja, Integer> {
         result = statement.executeQuery();
 
         if(result.next()){
-            tulos.setYstavaPareja(result.getInt("pareja"));
+            tulos.setYstavapareja(result.getInt("pareja"));
 
         }
         statement.close();
