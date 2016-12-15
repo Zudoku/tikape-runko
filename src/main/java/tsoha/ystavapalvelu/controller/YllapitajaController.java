@@ -24,6 +24,7 @@ public class YllapitajaController {
     public YllapitajaController(Database database) {
         this.database = database;
         this.yllapitajaDao = new YllapitajaDao(database);
+        this.asiakasDao = new AsiakasDao(database);
         this.init();
     }
 
