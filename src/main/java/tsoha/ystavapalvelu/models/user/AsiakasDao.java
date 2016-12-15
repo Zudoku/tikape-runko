@@ -163,7 +163,7 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         ResultSet results = statement.executeQuery();
 
         while(results.next()){
-            asiakkaat.add(results.getInt("Asiakas.id"));
+            asiakkaat.add(results.getInt("id"));
         }
         statement.close();
         results.close();

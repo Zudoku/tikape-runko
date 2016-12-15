@@ -26,7 +26,7 @@ CREATE TABLE Ystavapari (
 
 CREATE TABLE Viesti (
     id SERIAL PRIMARY KEY,
-    lahettaja integer NOT NULL,
+    lahettaja integer,
     vastaanottaja integer REFERENCES Asiakas (id),
     lahetetty timestamp NOT NULL,
     sisalto varchar(500) NOT NULL
