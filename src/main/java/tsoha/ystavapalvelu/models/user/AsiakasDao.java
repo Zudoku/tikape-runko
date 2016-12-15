@@ -113,14 +113,21 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
 
         while(results.next()){
             Asiakas loytynyt = collect(results);
-            String yllapitajaString = results.getString("Yllapitaja.kayttajanimi");
-            if (yllapitajaString == null || yllapitajaString.isEmpty()) {
-                Lasku lasku = new Lasku(results.getInt("Lasku.id"),
-                        results.getInt("Lasku.asiakas_id"),
-                        results.getInt("Yllapitaja.id"),
-                        results.getTimestamp("Lasku.laskutusaika"));
-                lasku.setYllapitajaString(yllapitajaString);
+            try {
+                int index = results.findColumn("Yllapitaja.kayttajanimi");
+                String yllapitajaString = results.getString("Yllapitaja.kayttajanimi");
+                if (yllapitajaString == null || yllapitajaString.isEmpty()) {
+                    Lasku lasku = new Lasku(results.getInt("Lasku.id"),
+                            results.getInt("Lasku.asiakas_id"),
+                            results.getInt("Yllapitaja.id"),
+                            results.getTimestamp("Lasku.laskutusaika"));
+                    lasku.setYllapitajaString(yllapitajaString);
+                }
+            } catch (SQLException e) {
+
             }
+
+
 
             asiakkaat.add(loytynyt);
         }
