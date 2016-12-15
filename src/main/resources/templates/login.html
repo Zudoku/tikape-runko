@@ -21,7 +21,7 @@
         Väärä nimi tai salasana!<br/><br/>
         HUOM! Tämä login sivu on vain ylläpitäjille.
     </div>
-    <a th:classappend="${!adminlogin} ? hidden : t" th:href="${'loginadmin'}" class="btn btn-warning">Ylläpitäjä-kirjautuminen</a>
+    <a th:classappend="${adminlogin} ? hidden : t" th:href="${'loginadmin'}" class="btn btn-warning">Ylläpitäjä-kirjautuminen</a>
 
     <form class="lomake" th:action="@{~/{address}(address=${(adminlogin)? 'loginadmin' : 'login'})}" th:object="${loginInfo}" method="post">
         <div class="form-group">
