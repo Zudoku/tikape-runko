@@ -154,7 +154,7 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
                         "ON Asiakas.id = Asiakashakutarkoitus.asiakas_id " +
                         "WHERE Asiakas.asiakas_id <> ? AND " +
                         "Asiakashakutarkoitus.hakutarkoitus IN " +
-                        "(SELECT hakutarkoitus_id FROM Asiakashakutarkoitus.asiakas_id = ? )"
+                        "(SELECT hakutarkoitus_id FROM Asiakashakutarkoitus WHERE asiakas_id = ? )"
         );
 
         statement.setInt(1, asiakas_id);
