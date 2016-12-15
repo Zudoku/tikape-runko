@@ -2,6 +2,7 @@ package tsoha.ystavapalvelu.models.user;
 
 import tsoha.ystavapalvelu.models.admin.Lasku;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -25,6 +26,7 @@ public class Asiakas {
         this.sukupuoli = sukupuoli;
         this.liittynyt = liittynyt;
         this.osoite = osoite;
+        //this.lasku = new Lasku(-1, -1, -1, new Timestamp(System.currentTimeMillis()));
     }
 
     public int getId() {
@@ -81,6 +83,14 @@ public class Asiakas {
 
     public void setOsoite(String osoite) {
         this.osoite = osoite;
+    }
+
+    public Lasku getLasku() {
+        return lasku;
+    }
+
+    public void setLasku(Lasku lasku) {
+        this.lasku = lasku;
     }
 
     public String prettyPrint(Date date) {
