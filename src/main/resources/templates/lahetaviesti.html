@@ -46,7 +46,7 @@
                 <span th:text="${virhe}"></span>
             </div>
             <span th:text="${tekeminen + targetAsiakas.kayttajanimi}"></span>
-            <form class="lomake" th:action="@{~/message/{targetId}/{actionstring}(targetId=${(sending)?' targetAsiakas.id : validatedinput.id},actionstring=${(sending)?'sendf' : 'editf'})}" th:object="${messageInfo}" method="post">
+            <form class="lomake" th:action="@{~/message/{targetId}/{actionstring}(targetId=${(sending)? targetAsiakas.id : validatedinput.id},actionstring=${(sending)?'sendf' : 'editf'})}" th:object="${messageInfo}" method="post">
                 <div class="form-group">
                     <label for="sisalto">Viestin sisältö</label>
                     <textarea id="sisalto" name="sisalto"  class="form-control" rows="5" th:text="${validatedinput.sisalto}"></textarea>
