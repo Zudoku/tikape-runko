@@ -46,8 +46,6 @@
                 <div class="well">
                     <strong>Tällä sivulla näet kaikki julkiset sivut jotka voivat kiinnostavat sinua.
                         Voit hakea esittelysivuja. Hakutulokset suodattuvat myös omissa tiedoissa määrittelemiesi hakukohteiden mukaan.
-                        <br/><br/>
-                        <div class="text-danger">HUOM! Haku ja suodatus ei ole vielä tehty!</div>
                     </strong>
                 </div>
             </div>
@@ -61,6 +59,8 @@
                     <button type="submit" class="btn btn-primary">Hae</button>
                 </form>
             </div>
+            <br/>
+            <hr/>
 
             <div id="results">
                 <div th:each="esittelysivu : ${esittelysivut}" class="row">

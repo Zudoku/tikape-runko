@@ -101,7 +101,7 @@ public class EsittelySivuController {
             if(sessioAsiakas == null) {
                 res.redirect("/?norights=1", 302);
             }
-            String haku = req.params("haku");
+            String haku = req.queryParams("haku");
             if(haku == null) {
                 haku = "";
             }
