@@ -152,7 +152,7 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
                 "SELECT DISTINCT id FROM Asiakas " +
                         "LEFT JOIN Asiakashakutarkoitus " +
                         "ON Asiakas.id=Asiakashakutarkoitus.asiakas_id " +
-                        "WHERE Asiakas.asiakas_id != ? AND" +
+                        "WHERE Asiakas.asiakas_id != ? AND " +
                         "Asiakashakutarkoitus.hakutarkoitus IN " +
                         "(SELECT hakutarkoitus_id FROM Asiakashakutarkoitus.asiakas_id=?)"
         );

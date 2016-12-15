@@ -236,11 +236,11 @@ public class AsiakasController {
         for(int i = 0; i < hakutarkoitusStringit.size(); i++) {
             String arvo = hakutarkoitusStringit.get(i);
             if(arvo == null || arvo.isEmpty()){
-                tulos.add(new Hakutarkoitus(Hakutarkoitus.laabelit.get(i), i, false));
+                tulos.add(new Hakutarkoitus(Hakutarkoitus.laabelit.get(i), i +1, false));
                 continue;
             }
             if(arvo.equals("on")) {
-                tulos.add(new Hakutarkoitus(Hakutarkoitus.laabelit.get(i), i, true));
+                tulos.add(new Hakutarkoitus(Hakutarkoitus.laabelit.get(i), i + 1, true));
                 continue;
             }
             errors.add("Hakutarkoitus on väärässä muodossa! " + input);

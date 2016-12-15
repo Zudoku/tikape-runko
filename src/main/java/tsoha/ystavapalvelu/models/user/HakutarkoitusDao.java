@@ -73,7 +73,7 @@ public class HakutarkoitusDao {
 
     public void lisaaHakuValinnatKayttajalle(List<Hakutarkoitus> hakutarkoitukset, int asiakas_id) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO Asiakashakutarkoitus (hakutarkoitus_id,asiakas_id)" +
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Asiakashakutarkoitus (hakutarkoitus_id, asiakas_id)" +
                 " VALUES (?,?)");
         for (Hakutarkoitus hakutarkoitus : hakutarkoitukset) {
             statement.setInt(1, hakutarkoitus.getId());
