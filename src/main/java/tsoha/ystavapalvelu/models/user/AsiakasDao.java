@@ -149,11 +149,11 @@ public class AsiakasDao implements Dao<Asiakas, Integer> {
         List<Integer> asiakkaat = new ArrayList<>();
         Connection connection = database.getConnection();
         PreparedStatement statement = connection.prepareStatement(
-                "SELECT DISTINCT id FROM Asiakas " +
+                "SELECT DISTINCT Asiakas.id FROM Asiakas " +
                         "LEFT JOIN Asiakashakutarkoitus " +
                         "ON Asiakas.id = Asiakashakutarkoitus.asiakas_id " +
-                        "WHERE Asiakas.asiakas_id <> ? AND " +
-                        "Asiakashakutarkoitus.hakutarkoitus IN " +
+                        "WHERE Asiakas.id <> ? AND " +
+                        "Asiakashakutarkoitus.hakutarkoitus_id IN " +
                         "(SELECT hakutarkoitus_id FROM Asiakashakutarkoitus WHERE asiakas_id = ? )"
         );
 
