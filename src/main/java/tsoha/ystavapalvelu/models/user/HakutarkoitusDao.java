@@ -76,12 +76,16 @@ public class HakutarkoitusDao {
         PreparedStatement statement = connection.prepareStatement("INSERT INTO Asiakashakutarkoitus (hakutarkoitus_id, asiakas_id)" +
                 " VALUES (?,?)");
         for (Hakutarkoitus hakutarkoitus : hakutarkoitukset) {
+            if(!hakutarkoitus.isChecked()){
+                continue;
+            }
             statement.setInt(1, hakutarkoitus.getId());
             statement.setInt(2, asiakas_id);
             statement.execute();
-        }
 
+        }
         statement.close();
+
         connection.close();
     }
 }
