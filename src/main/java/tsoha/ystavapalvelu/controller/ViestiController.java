@@ -170,6 +170,10 @@ public class ViestiController {
             Viesti oldViesti = viestiDao.findOne(messageId);
             Asiakas targetAsiakas = asiakasDao.findOne(oldViesti.getVastaanottaja());
 
+            if(oldViesti.getLahettaja() != sessioAsiakas.getId()) {
+                res.redirect("/mymessages?error=1", 302);
+            }
+
             Timestamp now = new Timestamp(System.currentTimeMillis());
             Viesti input = oldViesti;
             input.setLahetetty(now);
