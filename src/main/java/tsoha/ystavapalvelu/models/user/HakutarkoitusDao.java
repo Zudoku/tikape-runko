@@ -40,14 +40,13 @@ public class HakutarkoitusDao {
 
         Connection connection = database.getConnection();
         PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM Asiakashakutarkoitus " +
-                "LEFT JOIN Hakutarkoitus ON Asiakashakutarkoitus.hakutarkoitus_id=Hakutarkoitus.id " +
-                "WHERE Asiakashakutarkoitus.asiakas_id=?");
+                "SELECT hakutarkoitus_id FROM Asiakashakutarkoitus " +
+                "WHERE asiakas_id=?");
 
         statement.setInt(1, asiakas_id);
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()){
-            int foundId = resultSet.getInt("Asiakashakutarkoitus.hakutarkoitus_id");
+            int foundId = resultSet.getInt("hakutarkoitus_id");
             tulos.forEach(hakutarkoitus -> {
                 if(foundId == hakutarkoitus.getId()){
                     hakutarkoitus.setChecked(true);

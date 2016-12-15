@@ -43,11 +43,11 @@ public class Statistiikka {
         this.laskuja = laskuja;
     }
 
-    public int getYstavaPareja() {
+    public int getYstavapareja() {
         return ystavapareja;
     }
 
-    public void setYstavaPareja(int ystavaPareja) {
-        this.ystavapareja = ystavaPareja;
+    public void setYstavapareja(int ystavapareja) {
+        this.ystavapareja = ystavapareja;
     }
 }
