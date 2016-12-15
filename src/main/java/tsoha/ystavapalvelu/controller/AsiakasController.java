@@ -177,7 +177,7 @@ public class AsiakasController {
 
             List<String> hakutarkoitusStringit = new ArrayList<String>();
             for(int i= 0; i < 6; i++) {
-                hakutarkoitusStringit.add(req.queryParams("hakutarkoitus" + i));
+                hakutarkoitusStringit.add(req.queryParams("hakut" + i));
             }
 
             List<Hakutarkoitus> hakutarkoitukset = validoiHakutarkoitukset(hakutarkoitusStringit, errors, input);
