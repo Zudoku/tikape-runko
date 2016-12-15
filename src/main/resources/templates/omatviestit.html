@@ -46,6 +46,9 @@
     <div th:hidden="${!added}" class="alert alert-success">
         Viesti lähetetty!
     </div>
+    <div th:hidden="${!edited}" class="alert alert-success">
+        Viestiä muokattu!
+    </div>
     <div th:hidden="${!deleted}" class="alert alert-warning">
         Viesti poistettu!
     </div>
@@ -74,6 +77,7 @@
                 <td>
                     <a th:classappend="${(viesti.lahettaja == 0)} ? hidden : t" th:href="${'/page/share/' + viesti.lahettaja}" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
                     <a th:href="${'message/' + viesti.lahettaja + '/send'}" class="btn btn-primary">Vastaa</a>
+
                 </td>
             </tr>
             </tbody>
@@ -103,7 +107,9 @@
                 </td>
                 <td>
                     <a th:href="${'/page/share/' + viesti.vastaanottaja}" href="#" class="btn btn-success">Anna oikeudet esittelysivuihin</a>
+                    <a th:href="${'message/' + viesti.lahettaja + '/edit'}" class="btn btn-warning">Muokkaa</a>
                     <a th:href="${'message/' + viesti.id + '/delete'}" class="btn btn-danger">Poista viesti</a>
+
                 </td>
             </tr>
             </tbody>

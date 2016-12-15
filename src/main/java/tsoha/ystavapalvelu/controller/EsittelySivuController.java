@@ -4,9 +4,9 @@ import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tsoha.ystavapalvelu.database.Database;
 import tsoha.ystavapalvelu.models.page.EsittelySivu;
-import tsoha.ystavapalvelu.models.page.EsittelySivuDao;
+import tsoha.ystavapalvelu.database.dao.EsittelySivuDao;
 import tsoha.ystavapalvelu.models.user.Asiakas;
-import tsoha.ystavapalvelu.models.user.AsiakasDao;
+import tsoha.ystavapalvelu.database.dao.AsiakasDao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -63,6 +63,7 @@ public class EsittelySivuController {
             for(EsittelySivu esittelysivu : jaetut){
                 if(esittelysivu.getSivu_id() == pageId){
                     jaettu = true;
+                    break;
                 }
             };
 

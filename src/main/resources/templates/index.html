@@ -69,7 +69,9 @@
                 </ul>
                 <a th:classappend="${!kirjautunut} ? hidden : t" class="btn btn-default" href="/register">Rekisteröidy</a>
                 <a th:classappend="${!kirjautunut} ? hidden : t" class="btn btn-default" href="/login">Kirjaudu sisään</a>
-                
+                <br/>
+                <br/>
+                <a th:classappend="${!kirjautunut} ? hidden : t" th:href="${'loginadmin'}" ><small>Ylläpitäjä-kirjautuminen</small></a>
             </div>
         </div>
         <!-- Add jQuery for bootstrap -->

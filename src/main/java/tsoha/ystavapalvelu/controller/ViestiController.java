@@ -4,10 +4,9 @@ import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tsoha.ystavapalvelu.database.Database;
 import tsoha.ystavapalvelu.models.message.Viesti;
-import tsoha.ystavapalvelu.models.message.ViestiDao;
-import tsoha.ystavapalvelu.models.page.EsittelySivu;
+import tsoha.ystavapalvelu.database.dao.ViestiDao;
 import tsoha.ystavapalvelu.models.user.Asiakas;
-import tsoha.ystavapalvelu.models.user.AsiakasDao;
+import tsoha.ystavapalvelu.database.dao.AsiakasDao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -111,6 +110,7 @@ public class ViestiController {
 
             map.put("deleted", "1".equals(req.queryParams("deleted")));
             map.put("added", "1".equals(req.queryParams("added")));
+            map.put("edited", "1".equals(req.queryParams("edited")));
 
 
             map.put("saadutviestit", viestiDao.findAllVastaanotettu(sessioAsiakas.getId()));
@@ -119,6 +119,77 @@ public class ViestiController {
 
             return new ModelAndView(map, "omatviestit");
         }, new ThymeleafTemplateEngine());
+
+        get("/message/:messageId/edit", (req, res) -> {
+            HashMap map = new HashMap<>();
+
+            Asiakas sessioAsiakas = req.session().attribute("asiakas");
+            if(sessioAsiakas == null) {
+                res.redirect("/?norights=1", 302);
+            }
+            Integer messageId = Integer.parseInt(req.params("messageId"));
+            Viesti muokattava = viestiDao.findOne(messageId);
+            map.put("targetAsiakas", asiakasDao.findOne(muokattava.getVastaanottaja()));
+
+            map.put("kirjautunut", false);
+            map.put("kayttaja",  sessioAsiakas.getKayttajanimi());
+            map.put("kayttajaid",  sessioAsiakas.getId());
+            map.put("tekeminen",  "Muokkaa viestiä henkilölle: ");
+            map.put("sending", false);
+
+            if(req.session().attribute("errors") != null) {
+                map.put("errors", req.session().attribute("errors"));
+            } else {
+                map.put("errors", new ArrayList<String>());
+            }
+
+            if(req.session().attribute("validatedinput") != null) {
+                map.put("validatedinput", req.session().attribute("validatedinput"));
+            } else {
+                map.put("validatedinput", muokattava);
+            }
+
+            req.session().removeAttribute("validatedinput");
+            req.session().removeAttribute("errors");
+
+            return new ModelAndView(map, "lahetaviesti");
+        }, new ThymeleafTemplateEngine());
+
+        post("/message/:messageId/editf", (req, res) -> {
+            List<String> errors = new ArrayList<String>();
+
+            Asiakas sessioAsiakas = req.session().attribute("asiakas");
+            Integer messageId = Integer.parseInt(req.params("messageId"));
+            if(sessioAsiakas == null) {
+                res.redirect("/?norights=1", 302);
+            }
+            Viesti oldViesti = viestiDao.findOne(messageId);
+            Asiakas targetAsiakas = asiakasDao.findOne(oldViesti.getVastaanottaja());
+
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            Viesti input = oldViesti;
+            input.setLahetetty(now);
+
+            String sisalto = req.queryParams("sisalto");
+            String anonyymi = req.queryParams("anonyymiys");
+
+            validoiSisalto(sisalto, errors, input);
+            validoiAnonyymiys(anonyymi, errors, input, sessioAsiakas.getId());
+
+            if(!errors.isEmpty()) {
+                req.session().attribute("errors", errors);
+                req.session().attribute("validatedinput", input);
+                res.redirect("/message/" + messageId + "/edit", 302);
+                return "OK";
+            }
+
+            viestiDao.update(input);
+
+            res.redirect("/mymessages?edited=1", 302);
+
+
+            return "OK";
+        });
 
         get("/message/:viestiId/delete", (req, res) -> {
             HashMap map = new HashMap<>();

@@ -4,10 +4,9 @@ import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tsoha.ystavapalvelu.database.Database;
 import tsoha.ystavapalvelu.models.admin.Yllapitaja;
-import tsoha.ystavapalvelu.models.admin.YllapitajaDao;
-import tsoha.ystavapalvelu.models.message.ViestiDao;
-import tsoha.ystavapalvelu.models.user.Asiakas;
-import tsoha.ystavapalvelu.models.user.AsiakasDao;
+import tsoha.ystavapalvelu.database.dao.YllapitajaDao;
+import tsoha.ystavapalvelu.database.dao.ViestiDao;
+import tsoha.ystavapalvelu.database.dao.AsiakasDao;
 
 import java.util.HashMap;
 

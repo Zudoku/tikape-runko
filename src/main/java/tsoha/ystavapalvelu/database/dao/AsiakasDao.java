@@ -1,7 +1,8 @@
-package tsoha.ystavapalvelu.models.user;
+package tsoha.ystavapalvelu.database.dao;
 
 import tsoha.ystavapalvelu.database.Dao;
 import tsoha.ystavapalvelu.database.Database;
+import tsoha.ystavapalvelu.models.user.Asiakas;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

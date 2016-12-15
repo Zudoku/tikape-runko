@@ -80,6 +80,7 @@
                 </div>
 
                 <h3>Hakutarkoitukseni</h3>
+                <hr/>
                 <div class="form-group" th:each="hakutarkoitus, iter : ${hakutarkoitukset}">
                     <label th:for="${'hakut' + iter.index}" th:text="${hakutarkoitus.label}"></label>
                     <input type="checkbox" th:id="${'hakut' + iter.index}" th:name="${'hakut' + iter.index}" aria-label="" th:checked="${hakutarkoitus.checked}"/>

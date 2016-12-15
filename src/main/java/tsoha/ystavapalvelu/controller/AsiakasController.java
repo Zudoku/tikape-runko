@@ -1,16 +1,15 @@
 package tsoha.ystavapalvelu.controller;
 
-import spark.Request;
 import tsoha.ystavapalvelu.database.Database;
-import tsoha.ystavapalvelu.models.message.ViestiDao;
+import tsoha.ystavapalvelu.database.dao.ViestiDao;
 import tsoha.ystavapalvelu.models.user.Asiakas;
-import tsoha.ystavapalvelu.models.user.AsiakasDao;
+import tsoha.ystavapalvelu.database.dao.AsiakasDao;
 import spark.ModelAndView;
-import spark.Spark;
+
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tsoha.ystavapalvelu.models.user.Hakutarkoitus;
-import tsoha.ystavapalvelu.models.user.HakutarkoitusDao;
+import tsoha.ystavapalvelu.database.dao.HakutarkoitusDao;
 
 import java.sql.SQLException;
 import java.text.ParseException;

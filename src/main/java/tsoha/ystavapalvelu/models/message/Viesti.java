@@ -82,4 +82,6 @@ public class Viesti {
     public void setVastaanottajaString(String vastaanottajaString) {
         this.vastaanottajaString = vastaanottajaString;
     }
+
+
 }

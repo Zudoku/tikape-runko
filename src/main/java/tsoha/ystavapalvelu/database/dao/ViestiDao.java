@@ -1,7 +1,8 @@
-package tsoha.ystavapalvelu.models.message;
+package tsoha.ystavapalvelu.database.dao;
 
 import tsoha.ystavapalvelu.database.Dao;
 import tsoha.ystavapalvelu.database.Database;
+import tsoha.ystavapalvelu.models.message.Viesti;
 import tsoha.ystavapalvelu.models.page.EsittelySivu;
 
 import java.sql.*;
