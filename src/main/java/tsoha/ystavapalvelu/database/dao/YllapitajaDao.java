@@ -98,16 +98,6 @@ public class YllapitajaDao implements Dao<Yllapitaja, Integer> {
         statement.close();
         result.close();
 
-        statement = connection.prepareStatement("SELECT COUNT(*) AS laskuja FROM Lasku");
-        result = statement.executeQuery();
-
-        if(result.next()){
-            tulos.setLaskuja(result.getInt("laskuja"));
-
-        }
-        statement.close();
-        result.close();
-
         statement = connection.prepareStatement("SELECT COUNT(*) AS pareja FROM Ystavapari");
         result = statement.executeQuery();
 

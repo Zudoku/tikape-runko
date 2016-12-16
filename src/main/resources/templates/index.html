@@ -62,9 +62,10 @@
                 </p>
                 <h3 th:hidden="${!kirjautunut}"> Syitä rekisteröityä </h3>
                 <ul th:hidden="${!kirjautunut}">
-                    <li>Edullista</li>
+                    <li>Ilmaista</li>
                     <li>Ei huijareita</li>
-                    <li>Ensimmäinen kuukausi ilmaiseksi</li>
+                    <li>Voit suodattaa sopivia ystäväehdokkaita</li>
+                    <li>Ei spämmiä</li>
                     <li>Tutustumishalusia ihmisiä</li>
                 </ul>
                 <a th:classappend="${!kirjautunut} ? hidden : t" class="btn btn-default" href="/register">Rekisteröidy</a>

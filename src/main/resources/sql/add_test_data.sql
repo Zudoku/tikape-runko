@@ -42,7 +42,7 @@ INSERT INTO Esittelysivu (omistaja_id, otsikko, leipateksti, luotu, muokattu, ju
 VALUES (3, 'Tuu juttelee','Jos näät tän viestin niin sit tuu juttelee. Jaoin tän sulle, koska vaikutat mukavalta.',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, false);
 
 INSERT INTO Esittelysivu (omistaja_id, otsikko, leipateksti, luotu, muokattu, julkinen)
-VALUES (2, 'Eiks täää palvelu oo vähä kallis?','Ku jonku kanssa juttelee ni heti tulee laskua.. mitä S****NAA ?',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, true);
+VALUES (2, 'Eiks täää palvelu oo vähä kummallinen?','Ei kukaan suomalainen haluu sosialisoida!',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, true);
 
 
 INSERT INTO Asiakashakutarkoitus (hakutarkoitus_id, asiakas_id) VALUES (1, 1);

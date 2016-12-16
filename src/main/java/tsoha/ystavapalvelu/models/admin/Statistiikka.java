@@ -4,7 +4,6 @@ public class Statistiikka {
     private int kayttajia;
     private int viesteja;
     private int sivuja;
-    private int laskuja;
     private int ystavapareja;
 
     public Statistiikka() {
@@ -35,13 +34,6 @@ public class Statistiikka {
         this.sivuja = sivuja;
     }
 
-    public int getLaskuja() {
-        return laskuja;
-    }
-
-    public void setLaskuja(int laskuja) {
-        this.laskuja = laskuja;
-    }
 
     public int getYstavapareja() {
         return ystavapareja;
